@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Layout from "./layout/main";
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <Layout></Layout>
+        {/* <Title title={this.state.currentCategory} />
+        <Title koko={this.state.currentCategory} />
+        <select onChange={(e) => this.onClickCategory(e)} defaultValue="tech">
+          <option value="all">all</option>
+          <option value="tech">tech</option>
+          <option value="clothes">clothes</option>
+        </select> */}
+      </div>
+    );
+  }
 }
 
 export default App;
