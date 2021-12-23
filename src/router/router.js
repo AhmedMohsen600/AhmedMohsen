@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CartPage } from "./pages";
-import { client } from "./service/apollo";
-import { GET_CATEGORIES } from "./service/queries/get-categories";
-import * as ROUTES from "./constant/route";
+import { CartPage, ProductDesc } from "../pages";
+import { client } from "../service/apollo";
+import { GET_CATEGORIES } from "../service/queries/get-categories";
+import * as ROUTES from "../constant/route";
 export default class PageRoutes extends Component {
   state = { categories: [], currentCategory: "tech" };
 
@@ -27,7 +27,7 @@ export default class PageRoutes extends Component {
             path={ROUTES.CART_PAGE}
             element={<CartPage categories={this.state.categories} />}
           />
-          <Route path={ROUTES.PRODUCT_DESC} element={<div>koko</div>} />
+          <Route path={ROUTES.PRODUCT_DESC} element={<ProductDesc />} />
         </Routes>
       </BrowserRouter>
     );

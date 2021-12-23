@@ -20,6 +20,7 @@ export const CartIcon = styled.button`
   align-items: center;
   border: 0;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 export const Card = styled.div`
