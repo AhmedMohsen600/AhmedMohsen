@@ -7,7 +7,7 @@ export const Container = styled.header`
 `;
 
 export const Nav = styled.nav`
-  width: 97%;
+  width: 94%;
   margin: auto;
   display: flex;
   justify-content: space-between;

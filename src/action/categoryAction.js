@@ -11,6 +11,7 @@ export const loadCategories = () => async (dispatch) => {
   for (let category of categories) {
     categ[category.name] = category;
   }
+
   dispatch({
     type: LOAD_CATEGORIES,
     payload: {

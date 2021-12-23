@@ -1,7 +1,6 @@
 import styled from "styled-components/macro";
 export const Image = styled.div`
   height: 330px;
-  border: 1px solid black;
   background: url(${({ src }) => src}) center / cover no-repeat;
 `;
 
@@ -24,7 +23,7 @@ export const CartIcon = styled.button`
 `;
 
 export const Card = styled.div`
-  flex: 1 1 calc(90% / 3);
+  flex: 0 1 calc(93.9% / 3);
   display: flex;
   position: relative;
   gap: 24px;

@@ -4,7 +4,7 @@ export default class Logo extends Component {
   render() {
     return (
       <svg
-        style={{ flex: "1" }}
+        style={{ marginRight: "30px" }}
         width="41"
         height="41"
         viewBox="0 0 41 41"

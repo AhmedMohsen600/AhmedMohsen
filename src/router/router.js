@@ -8,6 +8,7 @@ export default class PageRoutes extends Component {
   state = { categories: [], currentCategory: "tech" };
 
   async componentDidMount() {
+    if (this.state.categories.length !== 0) return;
     const {
       data: { categories },
     } = await client.query({ query: GET_CATEGORIES });

@@ -24,7 +24,7 @@ export default class Header extends Component {
     return (
       <Container>
         <Nav>
-          <Group flex="0.5">
+          <Group>
             {this.items.map((item) => (
               <CategoryName
                 key={item.name}
@@ -36,7 +36,7 @@ export default class Header extends Component {
             ))}
           </Group>
           <Logo />
-          <Group flex="0.5" gap="22px">
+          <Group gap="22px">
             <Group gap="8px">
               <Symbol>$</Symbol>
               <svg

@@ -10,7 +10,7 @@ export const Container = styled.div`
   position: absolute;
   background-color: white;
   top: 100%;
-  right: 11%;
+  right: 2.8%;
   opacity: ${({ active }) => (active ? "1" : "0")};
   transform: ${({ active }) => (active ? "scale(1)" : "scale(0.4)")};
   pointer-events: ${({ active }) => (active ? "all" : "none")};
