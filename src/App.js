@@ -1,12 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 import Layout from "./layout/main";
 import PageRoutes from "./router";
-class App extends React.Component {
+import { Provider } from "react-redux";
+import store from "./store/store";
+class App extends Component {
   render() {
     return (
-      <Layout>
-        <PageRoutes />
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <PageRoutes />
+        </Layout>
+      </Provider>
     );
   }
 }

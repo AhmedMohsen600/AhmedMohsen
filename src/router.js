@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartPage } from "./pages";
 import { client } from "./service/apollo";
 import { GET_CATEGORIES } from "./service/queries/get-categories";
+import * as ROUTES from "./constant/route";
 export default class PageRoutes extends Component {
   state = { categories: [], currentCategory: "tech" };
 
@@ -15,7 +16,6 @@ export default class PageRoutes extends Component {
     for (let category of categories) {
       categ[category.name] = category;
     }
-
     this.setState({ categories: categ });
     console.log(this.state.categories);
   }
@@ -24,10 +24,10 @@ export default class PageRoutes extends Component {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path={ROUTES.CART_PAGE}
             element={<CartPage categories={this.state.categories} />}
           />
-          <Route path="/product-desc" element={<div>koko</div>} />
+          <Route path={ROUTES.PRODUCT_DESC} element={<div>koko</div>} />
         </Routes>
       </BrowserRouter>
     );
