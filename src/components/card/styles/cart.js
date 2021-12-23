@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 export const Image = styled.div`
   height: 330px;
   border: 1px solid black;
-  background: url(${({ src }) => src}) center top/ cover;
+  background: url(${({ src }) => src}) center / cover no-repeat;
 `;
 
 export const CartIcon = styled.button`

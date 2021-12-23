@@ -1,6 +1,8 @@
 import styled from "styled-components/macro";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  margin-bottom: 40px;
+`;
 
 export const Inner = styled.div`
   width: 94%;

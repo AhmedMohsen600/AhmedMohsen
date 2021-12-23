@@ -6,12 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 import { client } from "./service/apollo";
 import { GlobalStyles } from "./global-styles";
 ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <GlobalStyles />
-      <App />
-    </ApolloProvider>
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <GlobalStyles />
+    <App />
+  </ApolloProvider>,
+
   document.getElementById("root")
 );
 

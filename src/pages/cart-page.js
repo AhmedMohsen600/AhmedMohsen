@@ -7,10 +7,6 @@ export default class CartPage extends Component {
   }
 
   render() {
-    return (
-      <>
-        <Hero categories={this.state.categories} />
-      </>
-    );
+    return <Hero categories={this.state.categories} />;
   }
 }

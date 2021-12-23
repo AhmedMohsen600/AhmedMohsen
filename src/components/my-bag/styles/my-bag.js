@@ -72,7 +72,7 @@ export const ProductCount = styled.div`
 `;
 
 export const ProductImage = styled.div`
-  background: url(${({ src }) => src}) center top / cover;
+  background: url(${({ src }) => src}) center top / cover no-repeat;
   width: 105px;
   height: 137px;
 `;
