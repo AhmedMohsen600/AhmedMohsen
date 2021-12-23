@@ -7,19 +7,18 @@ import * as ROUTES from "../constant/route";
 export default class PageRoutes extends Component {
   state = { categories: [], currentCategory: "tech" };
 
-  async componentDidMount() {
-    if (this.state.categories.length !== 0) return;
-    const {
-      data: { categories },
-    } = await client.query({ query: GET_CATEGORIES });
+  // async componentDidMount() {
+  //   const {
+  //     data: { categories },
+  //   } = await client.query({ query: GET_CATEGORIES });
 
-    const categ = {};
-    for (let category of categories) {
-      categ[category.name] = category;
-    }
-    this.setState({ categories: categ });
-    console.log(this.state.categories);
-  }
+  //   const categ = {};
+  //   for (let category of categories) {
+  //     categ[category.name] = category;
+  //   }
+  //   this.setState({ categories: categ });
+  //   console.log(this.state.categories);
+  // }
   render() {
     return (
       <BrowserRouter>
