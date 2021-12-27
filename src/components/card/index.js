@@ -1,38 +1,42 @@
 import { Component } from "react";
 import { ShopCart } from "..";
 import { Card, Content, Title, Image, CartIcon, Price } from "./styles/cart";
-export default class Cart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name || "",
-      price: this.props.price || "",
-      symbol: this.props.symbol || "",
-      src: this.props.src || "",
-    };
+import { connect } from "react-redux";
+import { addToCart } from "../../action/addToCartAction";
+class Cart extends Component {
+  componentDidMount() {
+    console.log(this.props.product);
   }
   render() {
     return (
       <Card>
-        <Image src={this.state.src || ""}></Image>
+        <Image src={this.props.src} />
         <CartIcon
           onClick={() => {
-            console.log("Added");
+            this.props.addToCart(this.props.product);
           }}
         >
           <ShopCart />
         </CartIcon>
         <Content>
           <Title>
-            {this.state.symbol || ""}
-            {this.state.name || ""}
+            {this.props.symbol}
+            {this.props.name}
           </Title>
           <Price>
-            {this.state.symbol || ""}
-            {this.state.price || ""}
+            {this.props.symbol}
+            {this.props.price}
           </Price>
         </Content>
       </Card>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (product) => dispatch(addToCart(product)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Cart);

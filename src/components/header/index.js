@@ -9,7 +9,9 @@ import {
   OverLay,
   LockBody,
 } from "./styles/header";
-export default class Header extends Component {
+import { connect } from "react-redux";
+import { changeCategory } from "../../action/categoryAction";
+class Header extends Component {
   state = {
     category: "all",
     active: false,
@@ -28,7 +30,10 @@ export default class Header extends Component {
             {this.items.map((item) => (
               <CategoryName
                 key={item.name}
-                onClick={() => this.setState({ category: item.category })}
+                onClick={() => {
+                  this.setState({ category: item.category });
+                  this.props.changeCategory(item.category);
+                }}
                 active={this.state.category === item.category ? 1 : 0}
               >
                 {item.name}
@@ -71,3 +76,11 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCategory: (category) => dispatch(changeCategory(category)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Header);

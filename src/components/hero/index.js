@@ -3,31 +3,32 @@ import { Cart } from "..";
 import { Container, Inner, CardsHolder, CategoryTitle } from "./styles/hero";
 import { connect } from "react-redux";
 import { loadCategories } from "../../action/categoryAction";
+
 class Hero extends Component {
-  //   componentDidMount() {
-  //     // console.log(this.props.categories.categories);
-  //     // console.log(this.props.categories.categories.all.products);
-  //   }
+  componentDidMount() {
+    this.props.loadCategories();
+  }
 
   render() {
     return (
       <Container>
         <Inner>
           <CategoryTitle>
-            {this.props.categories.categories.all.name}
+            {this.props.categories[this.props.currentCategory].name}
           </CategoryTitle>
           <CardsHolder>
-            {this.props.categories.categories.all.products
-              ? this.props.categories.categories.all.products.map((categ) => (
-                  <Cart
-                    src={categ.gallery[0]}
-                    name={categ.name}
-                    price={categ.prices[0].amount}
-                    symbol={categ.prices[0].currency.symbol}
-                    key={categ.id}
-                  />
-                ))
-              : ""}
+            {this.props.categories[this.props.currentCategory].products.map(
+              (product) => (
+                <Cart
+                  product={product}
+                  src={product.gallery[0]}
+                  name={product.name}
+                  price={product.prices[0].amount}
+                  symbol={product.prices[0].currency.symbol}
+                  key={product.id}
+                />
+              )
+            )}
           </CardsHolder>
         </Inner>
       </Container>
@@ -37,12 +38,15 @@ class Hero extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories,
+    categories: state.categories.data,
+    products: state.products,
+    currentCategory: state.categories.currentCategory,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadCategories: dispatch(loadCategories()),
+    loadCategories: () => dispatch(loadCategories()),
   };
 };
 

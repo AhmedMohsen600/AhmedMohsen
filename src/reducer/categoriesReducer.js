@@ -1,6 +1,11 @@
-import { LOAD_CATEGORIES } from "../constant/actions";
+import { LOAD_CATEGORIES, CHANGE_CATEGORY } from "../constant/actions";
 const initialState = {
-  categories: [],
+  data: {
+    all: { products: [] },
+    clothes: { products: [] },
+    tech: { products: [] },
+  },
+  currentCategory: "all",
 };
 
 const categoriesReducer = (state = initialState, action) => {
@@ -8,7 +13,12 @@ const categoriesReducer = (state = initialState, action) => {
     case LOAD_CATEGORIES:
       return {
         ...state,
-        categories: action.payload.categories,
+        data: action.payload,
+      };
+    case CHANGE_CATEGORY:
+      return {
+        ...state,
+        currentCategory: action.payload,
       };
     default:
       return {

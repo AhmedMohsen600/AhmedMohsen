@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 export const Image = styled.div`
   height: 330px;
-  background: url(${({ src }) => src}) center / cover no-repeat;
+  background: url(${({ src }) => src}) center 40% / cover no-repeat;
 `;
 
 export const CartIcon = styled.button`
