@@ -27,17 +27,27 @@ class MyBag extends Component {
           {this.props.carts.map((product) => (
             <Product key={product.name || ""}>
               <ProductDetails>
-                <Group gap="16px" direction="column">
+                <Group
+                  justify="flex-start"
+                  align="flex-start"
+                  gap="16px"
+                  direction="column"
+                >
                   <ProductName>{product.name || ""}</ProductName>
                   <ProductPrice>${product.prices[0].amount}</ProductPrice>
                 </Group>
-                <Group gap="8px" direction="row">
+                <Group align="center" gap="8px" direction="row">
                   <ProductSize>S</ProductSize>
                   <ProductSize>M</ProductSize>
                 </Group>
               </ProductDetails>
               <ProductCount>
-                <Group gap="30px" justify="center" direction="column">
+                <Group
+                  align="center"
+                  gap="30px"
+                  justify="center"
+                  direction="column"
+                >
                   <Increment>+</Increment>
                   <ItemCount>2</ItemCount>
                   <Decrement>-</Decrement>
@@ -48,11 +58,16 @@ class MyBag extends Component {
           ))}
         </ProductsGroup>
         <Group direction="column" gap="32px">
-          <Group width="100%" justify="space-between" direction="row">
+          <Group
+            align="center"
+            width="100%"
+            justify="space-between"
+            direction="row"
+          >
             <TotalPrice>Total</TotalPrice>
             <TotalPrice>$100.00</TotalPrice>
           </Group>
-          <Group gap="16px" justify="center">
+          <Group align="center" gap="16px">
             <ViewBag>VIEW BAG</ViewBag>
             <CheckOut>CHECK OUT</CheckOut>
           </Group>

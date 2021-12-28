@@ -48,6 +48,7 @@ export const ProductDetails = styled.div`
 export const ProductName = styled.h4`
   font-size: 16px;
   font-weight: 300;
+  max-width: 120px;
   font-style: normal;
   color: #1d1f22;
   line-height: 25.6px;
@@ -57,7 +58,6 @@ export const ProductPrice = styled.h5`
   font-weight: 500;
   font-size: 16px;
   font-style: normal;
-  align-self: flex-start;
 `;
 
 export const ProductSize = styled.div`
@@ -90,7 +90,7 @@ export const Group = styled.div`
   flex-direction: ${({ direction }) => direction};
   gap: ${({ gap }) => gap};
   justify-content: ${({ justify }) => justify};
-  align-items: center;
+  align-items: ${({ align }) => align};
   width: ${({ width }) => width};
 `;
 
