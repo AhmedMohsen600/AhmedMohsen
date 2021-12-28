@@ -11,11 +11,7 @@ class Cart extends Component {
     return (
       <Card>
         <Image src={this.props.src} />
-        <CartIcon
-          onClick={() => {
-            this.props.addToCart(this.props.product);
-          }}
-        >
+        <CartIcon onClick={() => this.props.addToCart(this.props.product)}>
           <ShopCart />
         </CartIcon>
         <Content>

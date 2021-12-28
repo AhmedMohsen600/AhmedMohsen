@@ -1,14 +1,14 @@
 import { ADD_TO_CART } from "../constant/actions";
 
 const initialState = {
-  carts: [],
+  data: [],
 };
 const cartsReducer = (state = initialState, action) => {
   const product = action.payload;
   switch (action.type) {
     case ADD_TO_CART:
       //   if Prodcut Alredy Exsit do not add it again.
-      const exsit = state.carts.find((item) => item.id === product.id);
+      const exsit = state.data.find((item) => item.id === product.id);
       if (exsit)
         return {
           ...state,
@@ -16,7 +16,7 @@ const cartsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        carts: [...state.carts, product],
+        data: [...state.data, product],
       };
     default:
       return {

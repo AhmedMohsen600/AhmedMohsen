@@ -16,6 +16,8 @@ export const Container = styled.div`
   pointer-events: ${({ active }) => (active ? "all" : "none")};
   transform: ${({ active }) =>
     active ? "translateY(0%)" : "translateY(-10%)"};
+  overflow-y: scroll;
+  max-height: 85vh;
 `;
 
 export const NumberOfProducts = styled.p`
@@ -55,6 +57,7 @@ export const ProductPrice = styled.h5`
   font-weight: 500;
   font-size: 16px;
   font-style: normal;
+  align-self: flex-start;
 `;
 
 export const ProductSize = styled.div`
@@ -104,12 +107,14 @@ export const CheckOut = styled.button`
   font-size: 14px;
   font-weight: 400;
   border: 0;
+  color: white;
   cursor: pointer;
 `;
 
 export const ViewBag = styled(CheckOut)`
   background-color: transparent;
   border: 1px solid black;
+  color: black;
 `;
 
 export const TotalPrice = styled.h5`
