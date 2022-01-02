@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { client } from "./service/apollo";
 import { GlobalStyles } from "./global-styles";
+
 render(
   <ApolloProvider client={client}>
     <GlobalStyles />
