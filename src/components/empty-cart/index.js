@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import styled from "styled-components/macro";
-export default class EmptyCart extends Component {
+import { connect } from "react-redux";
+import { setActive } from "../../redux/action/myBagAction";
+class EmptyCart extends Component {
   render() {
     return (
-      <Div {...this.props}>
+      <Div
+        onClick={() => {
+          this.props.setActive();
+        }}
+        {...this.props}
+      >
         <svg
           style={{ cursor: "pointer", position: "relative" }}
           width="20"
@@ -31,3 +38,10 @@ export default class EmptyCart extends Component {
 }
 
 const Div = styled.div``;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setActive: () => dispatch(setActive()),
+  };
+};
+export default connect(null, mapDispatchToProps)(EmptyCart);

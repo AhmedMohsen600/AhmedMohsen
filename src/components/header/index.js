@@ -10,7 +10,7 @@ import {
   LockBody,
 } from "./styles/header";
 import { connect } from "react-redux";
-import { changeCategory } from "../../action/categoryAction";
+import { changeCategory } from "../../redux/action/categoryAction";
 class Header extends Component {
   state = {
     category: "all",
@@ -36,7 +36,7 @@ class Header extends Component {
                 }}
                 active={this.state.category === item.category ? 1 : 0}
               >
-                {item.name}
+                {item.name.toUpperCase()}
               </CategoryName>
             ))}
           </Group>
@@ -60,18 +60,12 @@ class Header extends Component {
                 />
               </svg>
             </Group>
-            <EmptyCart
-              onClick={() =>
-                this.setState((prev) => ({
-                  active: !prev.active,
-                }))
-              }
-            />
+            <EmptyCart />
           </Group>
         </Nav>
-        <MyBag active={this.state.active} />
-        <OverLay active={this.state.active} />
-        {this.state.active ? <LockBody /> : null}
+        <MyBag />
+        <OverLay active={this.props.active} />
+        {this.props.active ? <LockBody /> : null}
       </Container>
     );
   }
@@ -82,5 +76,9 @@ const mapDispatchToProps = (dispatch) => {
     changeCategory: (category) => dispatch(changeCategory(category)),
   };
 };
-
-export default connect(null, mapDispatchToProps)(Header);
+const mapStateToProps = (state) => {
+  return {
+    active: state.active.active,
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,6 +1,6 @@
-import { client } from "../service/apollo";
-import { GET_CATEGORIES } from "../service/queries/get-categories";
-import { LOAD_CATEGORIES, CHANGE_CATEGORY } from "../constant/actions";
+import { client } from "../../service/apollo";
+import { GET_CATEGORIES } from "../../service/queries/get-categories";
+import { LOAD_CATEGORIES, CHANGE_CATEGORY } from "../../constant/actions";
 
 export const loadCategories = () => async (dispatch) => {
   const {

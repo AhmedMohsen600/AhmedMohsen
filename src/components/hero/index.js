@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { Cart } from "..";
 import { Container, Inner, CardsHolder, CategoryTitle } from "./styles/hero";
 import { connect } from "react-redux";
-import { loadCategories } from "../../action/categoryAction";
+import { loadCategories } from "../../redux/action/categoryAction";
 
 class Hero extends Component {
   componentDidMount() {
     this.props.loadCategories();
   }
-
   render() {
     return (
       <Container>

@@ -2,11 +2,9 @@ import { Component } from "react";
 import { ShopCart } from "..";
 import { Card, Content, Title, Image, CartIcon, Price } from "./styles/cart";
 import { connect } from "react-redux";
-import { addToCart } from "../../action/addToCartAction";
+import { addToCart } from "../../redux/action/addToCartAction";
+
 class Cart extends Component {
-  componentDidMount() {
-    console.log(this.props.product);
-  }
   render() {
     return (
       <Card>
@@ -15,10 +13,7 @@ class Cart extends Component {
           <ShopCart />
         </CartIcon>
         <Content>
-          <Title>
-            {this.props.symbol}
-            {this.props.name}
-          </Title>
+          <Title>{this.props.name}</Title>
           <Price>
             {this.props.symbol}
             {this.props.price}

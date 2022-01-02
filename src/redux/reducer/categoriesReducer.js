@@ -1,4 +1,4 @@
-import { LOAD_CATEGORIES, CHANGE_CATEGORY } from "../constant/actions";
+import { LOAD_CATEGORIES, CHANGE_CATEGORY } from "../../constant/actions";
 const initialState = {
   data: {
     all: { products: [] },

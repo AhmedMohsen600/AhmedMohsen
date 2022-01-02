@@ -18,14 +18,28 @@ import {
   TotalPrice,
 } from "./styles/my-bag";
 import { connect } from "react-redux";
+import { setActive } from "../../redux/action/myBagAction";
 class MyBag extends Component {
   render() {
-    console.log(this.props.carts);
+    // console.log(this.props.setState);
     return (
-      <Container {...this.props}>
+      <Container active={this.props.active} {...this.props}>
         <ProductsGroup>
+          <p>
+            <span
+              style={{
+                fontWeight: "700",
+                fontSize: "16px",
+                marginRight: "3px",
+              }}
+            >
+              My Bag,
+            </span>
+            {this.props.carts.length} items
+          </p>
+
           {this.props.carts.map((product) => (
-            <Product key={product.name || ""}>
+            <Product key={product.name}>
               <ProductDetails>
                 <Group
                   justify="flex-start"
@@ -33,7 +47,7 @@ class MyBag extends Component {
                   gap="16px"
                   direction="column"
                 >
-                  <ProductName>{product.name || ""}</ProductName>
+                  <ProductName>{product.name}</ProductName>
                   <ProductPrice>${product.prices[0].amount}</ProductPrice>
                 </Group>
                 <Group align="center" gap="8px" direction="row">
@@ -52,7 +66,7 @@ class MyBag extends Component {
                   <ItemCount>2</ItemCount>
                   <Decrement>-</Decrement>
                 </Group>
-                <ProductImage src={product.gallery[0] || ""} />
+                <ProductImage src={product.gallery[0]} />
               </ProductCount>
             </Product>
           ))}
@@ -65,10 +79,12 @@ class MyBag extends Component {
             direction="row"
           >
             <TotalPrice>Total</TotalPrice>
-            <TotalPrice>$100.00</TotalPrice>
+            <TotalPrice>$100</TotalPrice>
           </Group>
           <Group align="center" gap="16px">
-            <ViewBag>VIEW BAG</ViewBag>
+            <ViewBag onClick={() => this.props.setActive()} to="/carts">
+              VIEW BAG
+            </ViewBag>
             <CheckOut>CHECK OUT</CheckOut>
           </Group>
         </Group>
@@ -80,7 +96,12 @@ class MyBag extends Component {
 const mapStateToProps = (state) => {
   return {
     carts: state.carts.data,
+    active: state.active.active,
   };
 };
-
-export default connect(mapStateToProps)(MyBag);
+const mapDispatchToprops = (dispatch) => {
+  return {
+    setActive: () => dispatch(setActive()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToprops)(MyBag);

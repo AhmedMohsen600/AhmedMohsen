@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-
+import { Link } from "react-router-dom";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,7 +75,7 @@ export const ProductCount = styled.div`
 `;
 
 export const ProductImage = styled.div`
-  background: url(${({ src }) => src}) center top / cover no-repeat;
+  background: url(${({ src }) => src}) center top / contain no-repeat;
   width: 105px;
   height: 137px;
 `;
@@ -84,6 +84,7 @@ export const ItemCount = styled.span`
   font-weight: 500;
   font-style: normal;
 `;
+
 export const Group = styled.div`
   display: flex;
   height: ${({ height }) => height};
@@ -111,10 +112,18 @@ export const CheckOut = styled.button`
   cursor: pointer;
 `;
 
-export const ViewBag = styled(CheckOut)`
+export const ViewBag = styled(Link)`
+  padding: 16px 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
   background-color: transparent;
   border: 1px solid black;
   color: black;
+  text-decoration: none;
 `;
 
 export const TotalPrice = styled.h5`

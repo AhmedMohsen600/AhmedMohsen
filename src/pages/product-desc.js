@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
-export default class ProductDesc extends Component {
+class ProductDesc extends Component {
   render() {
     return <div>KOKO</div>;
   }
 }
+
+export default ProductDesc;

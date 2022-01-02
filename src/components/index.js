@@ -5,3 +5,4 @@ export { default as ShopCart } from "./shop-cart-icon";
 export { default as Logo } from "./logo";
 export { default as EmptyCart } from "./empty-cart";
 export { default as Hero } from "./hero";
+export { default as AllCarts } from "./all-carts";

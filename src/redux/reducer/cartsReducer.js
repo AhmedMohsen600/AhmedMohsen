@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../constant/actions";
+import { ADD_TO_CART } from "../../constant/actions";
 
 const initialState = {
   data: [],
