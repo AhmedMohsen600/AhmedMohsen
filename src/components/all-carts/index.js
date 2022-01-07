@@ -21,7 +21,9 @@ class AllCarts extends Component {
   //   componentDidMount() {
   //     console.log(this.props);
   //   }
-
+  state = {
+    size: "",
+  };
   render() {
     return (
       <Container>
@@ -38,7 +40,14 @@ class AllCarts extends Component {
                   gap="24px"
                 >
                   <ProductDesc>
-                    {product.description.replace(/([<p>/!<p>])/g, "")}
+                    {product.description
+                      ? product.description.replace(/([<p>/!<p>])/g, "")
+                          .length > 170
+                        ? product.description
+                            .replace(/([<p>/!<p>h1h3])/g, "")
+                            .slice(0, 90)
+                        : product.description.replace(/([<p>/!<p>h1h3])/g, "")
+                      : ""}
                   </ProductDesc>
                   <ProductPrice>${product.prices[0].amount}</ProductPrice>
                   <Group
@@ -47,8 +56,18 @@ class AllCarts extends Component {
                     direction="row"
                     gap="12px"
                   >
-                    <SizeBtn>S</SizeBtn>
-                    <SizeBtn active="kok">M</SizeBtn>
+                    <SizeBtn
+                      onClick={() => this.setState({ size: "s" })}
+                      active={this.state.size === "s" ? 1 : 0}
+                    >
+                      S
+                    </SizeBtn>
+                    <SizeBtn
+                      onClick={() => this.setState({ size: "m" })}
+                      active={this.state.size === "m" ? 1 : 0}
+                    >
+                      M
+                    </SizeBtn>
                   </Group>
                 </Group>
               </DetailsHolder>
