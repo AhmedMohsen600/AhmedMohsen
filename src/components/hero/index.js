@@ -3,6 +3,7 @@ import { Cart } from "..";
 import { Container, Inner, CardsHolder, CategoryTitle } from "./styles/hero";
 import { connect } from "react-redux";
 import { loadCategories } from "../../redux/action/categoryAction";
+import { productDetails } from "../../redux/action/detailsAction";
 
 class Hero extends Component {
   componentDidMount() {
@@ -13,7 +14,12 @@ class Hero extends Component {
       <Container>
         <Inner>
           <CategoryTitle>
-            {this.props.categories[this.props.currentCategory].name}
+            {this.props.categories[this.props.currentCategory].name
+              ? this.props.categories[this.props.currentCategory].name.replace(
+                  /./,
+                  (c) => c.toUpperCase()
+                )
+              : ""}
           </CategoryTitle>
           <CardsHolder>
             {this.props.categories[this.props.currentCategory].products.map(
@@ -46,6 +52,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadCategories: () => dispatch(loadCategories()),
+    addProduct: (product) => dispatch(productDetails(product)),
   };
 };
 

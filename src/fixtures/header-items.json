@@ -1,0 +1,14 @@
+[
+    {
+        "name": "All",
+        "category": "all"
+    },
+    {
+        "name": "Clothes",
+        "category": "clothes"
+    },
+    {
+        "name": "Tech",
+        "category": "tech"
+    }
+]

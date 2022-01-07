@@ -61,6 +61,7 @@ export const DecrementBtn = styled.button`
   align-items: center;
   background: none;
   border: 1px solid #1d1f22;
+  font-size: 20px;
 `;
 
 export const IncrementBtn = styled(DecrementBtn)``;

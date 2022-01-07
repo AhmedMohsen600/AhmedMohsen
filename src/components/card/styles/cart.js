@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+// import { Link } from "react-router-dom";
 export const Image = styled.div`
   height: 330px;
   background: url(${({ src }) => src}) center 40% / cover no-repeat;
@@ -20,6 +21,7 @@ export const CartIcon = styled.button`
   border: 0;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 1000000;
 `;
 
 export const Card = styled.div`
@@ -37,6 +39,7 @@ export const Card = styled.div`
   &:hover > ${CartIcon} {
     opacity: 1;
   }
+  text-decoration: none;
 `;
 
 export const Content = styled.div`

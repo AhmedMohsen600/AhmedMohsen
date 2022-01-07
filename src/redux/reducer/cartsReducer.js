@@ -17,7 +17,18 @@ const cartsReducer = (state = initialState, action) => {
       return {
         ...state,
         data: [...state.data, product],
+        product,
       };
+    // case "PRODUCT_DETAILS":
+    //   const exsit = state.data.find((item) => item.id === product.id);
+    //   if (exsit)
+    //     return {
+    //       ...state.product,
+    //     };
+    //   return {
+    //     ...state,
+    //     product: action.payload,
+    //   };
     default:
       return {
         ...state,

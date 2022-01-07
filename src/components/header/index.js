@@ -11,23 +11,18 @@ import {
 } from "./styles/header";
 import { connect } from "react-redux";
 import { changeCategory } from "../../redux/action/categoryAction";
+import headerItems from "../../fixtures/header-items.json";
 class Header extends Component {
   state = {
     category: "all",
     active: false,
   };
-  items = [
-    { name: "All", category: "all" },
-    { name: "Clothes", category: "clothes" },
-    { name: "Tech", category: "tech" },
-  ];
-
   render() {
     return (
       <Container>
         <Nav>
           <Group>
-            {this.items.map((item) => (
+            {headerItems.map((item) => (
               <CategoryName
                 key={item.name}
                 onClick={() => {

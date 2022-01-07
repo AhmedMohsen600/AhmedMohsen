@@ -21,7 +21,7 @@ import { connect } from "react-redux";
 import { setActive } from "../../redux/action/myBagAction";
 class MyBag extends Component {
   render() {
-    // console.log(this.props.setState);
+    console.log(this.props.prices);
     return (
       <Container active={this.props.active} {...this.props}>
         <ProductsGroup>
@@ -79,7 +79,7 @@ class MyBag extends Component {
             direction="row"
           >
             <TotalPrice>Total</TotalPrice>
-            <TotalPrice>$100</TotalPrice>
+            <TotalPrice>$500</TotalPrice>
           </Group>
           <Group align="center" gap="16px">
             <ViewBag onClick={() => this.props.setActive()} to="/carts">
@@ -97,6 +97,7 @@ const mapStateToProps = (state) => {
   return {
     carts: state.carts.data,
     active: state.active.active,
+    prices: state.carts.data.map((item) => item.prices),
   };
 };
 const mapDispatchToprops = (dispatch) => {
