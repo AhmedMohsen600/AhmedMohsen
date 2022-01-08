@@ -25,6 +25,7 @@ class Hero extends Component {
             {this.props.categories[this.props.currentCategory].products.map(
               (product) => (
                 <Cart
+                  inStock={product.inStock}
                   product={product}
                   src={product.gallery[0]}
                   name={product.name}

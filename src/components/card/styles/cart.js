@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 export const Image = styled.div`
   height: 330px;
   background: url(${({ src }) => src}) center 40% / cover no-repeat;
+  position: relative;
 `;
 
 export const CartIcon = styled.button`
@@ -40,6 +41,8 @@ export const Card = styled.div`
     opacity: 1;
   }
   text-decoration: none;
+  opacity: ${({ active }) => (active ? 1 : 0.8)};
+  pointer-events: ${({ active }) => (active ? "all" : "none")};
 `;
 
 export const Content = styled.div`
@@ -60,4 +63,15 @@ export const Price = styled.p`
   font-weight: 500;
   line-height: 1.6;
   color: #1d1f22;
+`;
+
+export const OutOfStock = styled.h3`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 400;
+  font-size: 28px;
+  color: #8d8f9a;
+  z-index: 10000;
 `;

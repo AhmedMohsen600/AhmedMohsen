@@ -3,3 +3,4 @@ export const ADD_TO_CART = "ADD_PRODUCT";
 export const CHANGE_CATEGORY = "CHANGE_CATEGORY";
 export const ACTIVE = "ACTIVE";
 export const PRODUCT_DETAILS = "PRODUCT_DETAILS";
+export const UPDATE_PRODUCT_CART = "UPDATE_PRODUCT_CART";

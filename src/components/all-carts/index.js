@@ -17,13 +17,25 @@ import {
 } from "./styles/all-carts";
 import { connect } from "react-redux";
 import { ItemCount } from "../my-bag/styles/my-bag";
+import { updateProductInCart } from "../../redux/action/addToCartAction";
 class AllCarts extends Component {
   //   componentDidMount() {
   //     console.log(this.props);
   //   }
   state = {
-    size: "",
+    size: "m",
   };
+  obj = [
+    {
+      name: "S",
+      size: "s",
+    },
+    {
+      name: "M",
+      size: "m",
+    },
+  ];
+
   render() {
     return (
       <Container>
@@ -32,23 +44,14 @@ class AllCarts extends Component {
           {this.props.carts.map((product) => (
             <Product key={product.name}>
               <DetailsHolder>
-                <ProductName>{product.name}</ProductName>
+                <ProductName>{product.brand}</ProductName>
                 <Group
                   alignItems="flex-start"
                   justify="flex-start"
                   direction="column"
                   gap="24px"
                 >
-                  <ProductDesc>
-                    {product.description
-                      ? product.description.replace(/([<p>/!<p>])/g, "")
-                          .length > 170
-                        ? product.description
-                            .replace(/([<p>/!<p>h1h3])/g, "")
-                            .slice(0, 90)
-                        : product.description.replace(/([<p>/!<p>h1h3])/g, "")
-                      : ""}
-                  </ProductDesc>
+                  <ProductDesc>{product.name}</ProductDesc>
                   <ProductPrice>${product.prices[0].amount}</ProductPrice>
                   <Group
                     alignItems="flex-start"
@@ -56,18 +59,20 @@ class AllCarts extends Component {
                     direction="row"
                     gap="12px"
                   >
-                    <SizeBtn
-                      onClick={() => this.setState({ size: "s" })}
-                      active={this.state.size === "s" ? 1 : 0}
-                    >
-                      S
-                    </SizeBtn>
-                    <SizeBtn
-                      onClick={() => this.setState({ size: "m" })}
-                      active={this.state.size === "m" ? 1 : 0}
-                    >
-                      M
-                    </SizeBtn>
+                    {this.obj.map((ob) => (
+                      <SizeBtn
+                        key={ob.size}
+                        onClick={() => {
+                          // const updatedProduct = { ...product };
+                          // updatedProduct.
+                          // this.props.updateProducrt(product);
+                          this.setState({ size: ob.size });
+                        }}
+                        active={this.state.size === ob.size ? 1 : 0}
+                      >
+                        {ob.name}
+                      </SizeBtn>
+                    ))}
                   </Group>
                 </Group>
               </DetailsHolder>
@@ -96,5 +101,9 @@ export const mapStateToProps = (state) => {
     carts: state.carts.data,
   };
 };
-
+export const mapDispatchToProps = (disptach) => {
+  return {
+    updateProducrt: (product) => disptach(updateProductInCart(product)),
+  };
+};
 export default connect(mapStateToProps)(AllCarts);

@@ -56,22 +56,8 @@ class ProductDetails extends Component {
               />
               <DetailsHolder>
                 <Group direction="column" gap="16px">
-                  <ProductName>{this.props.product.name}</ProductName>
-                  <ProductDesc>
-                    {this.props.product.description
-                      ? this.props.product.description.replace(
-                          /([<p>/!<p>])/g,
-                          ""
-                        ).length > 170
-                        ? this.props.product.description
-                            .replace(/([<p>/!<p>h1h3])/g, "")
-                            .slice(0, 90)
-                        : this.props.product.description.replace(
-                            /([<p>/!<p>h1h3])/g,
-                            ""
-                          )
-                      : ""}
-                  </ProductDesc>
+                  <ProductName>{this.props.product.brand}</ProductName>
+                  <ProductDesc>{this.props.product.name}</ProductDesc>
                 </Group>
                 <Group gap="8px" direction="column">
                   <SizeText>SIZE:</SizeText>
@@ -94,16 +80,19 @@ class ProductDetails extends Component {
                     {this.props.product.prices[0].amount}
                   </ProductPrice>
                   <AddToCartBtn
-                    onClick={() => this.props.addToCart(this.props.product)}
+                    onClick={() => {
+                      // let productObj = { ...this.props.product };
+                      this.props.addToCart(this.props.product);
+                    }}
                   >
                     ADD TO CART
                   </AddToCartBtn>
                 </Group>
-                <TextDesc>
-                  Find stunning women's cocktail dresses and party dresses.
-                  Stand out in lace and metallic cocktail dresses and party
-                  dresses from all your favorite brands.
-                </TextDesc>
+                <TextDesc
+                  dangerouslySetInnerHTML={{
+                    __html: this.props.product.description,
+                  }}
+                />
               </DetailsHolder>
             </ContentHolder>
           </Product>

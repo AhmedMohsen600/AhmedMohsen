@@ -78,7 +78,6 @@ export const Group = styled.div`
   gap: ${({ gap }) => gap};
   justify-content: ${({ justify }) => justify};
   align-items: ${({ alignItems }) => alignItems};
-  height: 100%;
 `;
 
 export const DetailsHolder = styled.div`

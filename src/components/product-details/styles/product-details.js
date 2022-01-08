@@ -24,7 +24,7 @@ export const Product = styled.div`
 
 export const BigImage = styled.div`
   flex: 1;
-  /* width: 610px; */
+  max-height: 600px;
   background: url(${({ src }) => src}) center / cover no-repeat;
 `;
 
@@ -42,9 +42,8 @@ export const SmallImage = styled.div`
 export const DetailsHolder = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 0.5;
   gap: 40px;
-  max-width: 25%;
+  width: 25%;
 `;
 
 export const SizeText = styled.h5`
@@ -60,6 +59,7 @@ export const SmallImagesGroup = styled.div`
 export const ContentHolder = styled.div`
   display: flex;
   gap: 100px;
+  width: 100%;
 `;
 
 export const PriceText = styled(SizeText)``;
@@ -72,6 +72,6 @@ export const AddToCartBtn = styled.button`
   cursor: pointer;
 `;
 
-export const TextDesc = styled.p`
+export const TextDesc = styled.div`
   font: normal 400 16px/25.59px Roboto, sans-serif;
 `;

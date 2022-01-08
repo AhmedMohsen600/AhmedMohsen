@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../../constant/actions";
+import { ADD_TO_CART, UPDATE_PRODUCT_CART } from "../../constant/actions";
 
 const initialState = {
   data: [],
@@ -17,18 +17,20 @@ const cartsReducer = (state = initialState, action) => {
       return {
         ...state,
         data: [...state.data, product],
-        product,
       };
-    // case "PRODUCT_DETAILS":
-    //   const exsit = state.data.find((item) => item.id === product.id);
-    //   if (exsit)
-    //     return {
-    //       ...state.product,
-    //     };
-    //   return {
-    //     ...state,
-    //     product: action.payload,
-    //   };
+    case UPDATE_PRODUCT_CART:
+      const productIndex = state.data.findIndex(
+        (item) => item.id === product.id
+      );
+      if (productIndex) {
+        let cartData = state.data;
+        cartData[productIndex] = product;
+        return {
+          ...state,
+          data: cartData,
+        };
+      }
+      break;
     default:
       return {
         ...state,
