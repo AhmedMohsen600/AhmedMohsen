@@ -9,7 +9,7 @@ const myBagReducer = (state = initialState, action) => {
     case ACTIVE:
       return {
         ...state,
-        active: !state.active,
+        active: action.payload === "close" ? false : !state.active,
       };
     default:
       return {

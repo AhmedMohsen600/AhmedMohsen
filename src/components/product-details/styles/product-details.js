@@ -25,7 +25,7 @@ export const Product = styled.div`
 export const BigImage = styled.div`
   flex: 1;
   max-height: 600px;
-  background: url(${({ src }) => src}) center / cover no-repeat;
+  background: url(${({ src }) => src}) center / contain no-repeat;
 `;
 
 export const SmallImage = styled.div`

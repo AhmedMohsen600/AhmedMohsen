@@ -76,13 +76,20 @@ class ProductDetails extends Component {
                 <Group direction="column" gap="20px">
                   <PriceText>PRICE:</PriceText>
                   <ProductPrice>
-                    {this.props.product.prices[0].currency.symbol}
-                    {this.props.product.prices[0].amount}
+                    {this.props.currentSymbol}
+                    {
+                      this.props.product.prices.find(
+                        (pr) => pr.currency.symbol === this.props.currentSymbol
+                      ).amount
+                    }
                   </ProductPrice>
                   <AddToCartBtn
                     onClick={() => {
-                      // let productObj = { ...this.props.product };
-                      this.props.addToCart(this.props.product);
+                      const productObj = {
+                        ...this.props.product,
+                        size: this.state.size,
+                      };
+                      this.props.addToCart(productObj);
                     }}
                   >
                     ADD TO CART
@@ -104,6 +111,7 @@ class ProductDetails extends Component {
 const mapStateToProps = (state) => {
   return {
     product: state.product.data,
+    currentSymbol: state.currencies.currentSymbol,
   };
 };
 const mapDispatchToProps = (dispatch) => {

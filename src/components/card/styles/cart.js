@@ -41,8 +41,8 @@ export const Card = styled.div`
     opacity: 1;
   }
   text-decoration: none;
-  opacity: ${({ active }) => (active ? 1 : 0.8)};
-  pointer-events: ${({ active }) => (active ? "all" : "none")};
+  /* opacity: ${({ active }) => (active ? 1 : 0.8)};
+  pointer-events: ${({ active }) => (active ? "all" : "none")}; */
 `;
 
 export const Content = styled.div`

@@ -7,7 +7,7 @@ import {
   Image,
   CartIcon,
   Price,
-  OutOfStock,
+  // OutOfStock,
 } from "./styles/cart";
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/action/addToCartAction";
@@ -22,7 +22,7 @@ class Cart extends Component {
       >
         <Link to={`/product/${this.props.product.id}`}>
           <Image src={this.props.src}>
-            {this.props.inStock ? null : <OutOfStock>OUT OF STOCK</OutOfStock>}
+            {/* {this.props.inStock ? null : <OutOfStock>OUT OF STOCK</OutOfStock>} */}
           </Image>
         </Link>
         <CartIcon onClick={() => this.props.addToCart(this.props.product)}>
@@ -31,8 +31,12 @@ class Cart extends Component {
         <Content>
           <Title>{this.props.name}</Title>
           <Price>
-            {this.props.symbol}
-            {this.props.price}
+            {this.props.currentSymbol}
+            {
+              this.props.price.find(
+                (pr) => pr.currency.symbol === this.props.currentSymbol
+              ).amount
+            }
           </Price>
         </Content>
       </Card>
@@ -43,6 +47,7 @@ class Cart extends Component {
 const mapStateToProps = (state) => {
   return {
     data: state.product.data,
+    currentSymbol: state.currencies.currentSymbol,
   };
 };
 

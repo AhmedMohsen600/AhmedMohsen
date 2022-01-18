@@ -8,15 +8,24 @@ import {
   Symbol,
   OverLay,
   LockBody,
+  DropDown,
 } from "./styles/header";
 import { connect } from "react-redux";
 import { changeCategory } from "../../redux/action/categoryAction";
 import headerItems from "../../fixtures/header-items.json";
+import { setActive } from "../../redux/action/myBagAction";
+import {
+  loadCurrencies,
+  setCurrentCurrency,
+} from "../../redux/action/currenciesAction";
 class Header extends Component {
   state = {
     category: "all",
     active: false,
   };
+  componentDidMount() {
+    this.props.getCurrencies();
+  }
   render() {
     return (
       <Container>
@@ -37,23 +46,43 @@ class Header extends Component {
           </Group>
           <Logo />
           <Group gap="22px">
-            <Group gap="8px">
-              <Symbol>$</Symbol>
-              <svg
-                style={{ cursor: "pointer" }}
-                width="8"
-                height="4"
-                viewBox="0 0 8 4"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <Group position="relative" gap="8px">
+              <Symbol
+                onClick={() => {
+                  this.setState((prev) => ({
+                    active: !prev.active,
+                  }));
+                  this.props.setActive("close");
+                }}
               >
-                <path
-                  d="M1 0.5L4 3.5L7 0.5"
-                  stroke="black"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+                {this.props.currentSymbol}
+                <DropDown active={this.state.active}>
+                  {this.props.currencies.map((currency) => (
+                    <div
+                      onClick={() => this.props.changeCurrency(currency.symbol)}
+                      key={currency.symbol}
+                    >
+                      {currency.symbol}
+                      {currency.label}
+                    </div>
+                  ))}
+                </DropDown>
+                <svg
+                  style={{ cursor: "pointer" }}
+                  width="8"
+                  height="4"
+                  viewBox="0 0 8 4"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 0.5L4 3.5L7 0.5"
+                    stroke="black"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Symbol>
             </Group>
             <EmptyCart />
           </Group>
@@ -65,15 +94,21 @@ class Header extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    active: state.active.active,
+    currencies: state.currencies.data,
+    currentSymbol: state.currencies.currentSymbol,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCategory: (category) => dispatch(changeCategory(category)),
+    setActive: (pay) => dispatch(setActive(pay)),
+    getCurrencies: () => dispatch(loadCurrencies()),
+    changeCurrency: (currency) => dispatch(setCurrentCurrency(currency)),
   };
 };
-const mapStateToProps = (state) => {
-  return {
-    active: state.active.active,
-  };
-};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

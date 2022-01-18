@@ -19,9 +19,12 @@ import {
 } from "./styles/my-bag";
 import { connect } from "react-redux";
 import { setActive } from "../../redux/action/myBagAction";
+import {
+  decrementItem,
+  increaseItem,
+} from "../../redux/action/addToCartAction";
 class MyBag extends Component {
   render() {
-    console.log(this.props.prices);
     return (
       <Container active={this.props.active} {...this.props}>
         <ProductsGroup>
@@ -48,7 +51,15 @@ class MyBag extends Component {
                   direction="column"
                 >
                   <ProductName>{product.name}</ProductName>
-                  <ProductPrice>${product.prices[0].amount}</ProductPrice>
+                  <ProductPrice>
+                    {this.props.currentSymbol}
+                    {Math.floor(
+                      product.prices.find(
+                        (price) =>
+                          price.currency.symbol === this.props.currentSymbol
+                      ).amount * product.qtx
+                    )}
+                  </ProductPrice>
                 </Group>
                 <Group align="center" gap="8px" direction="row">
                   <ProductSize>S</ProductSize>
@@ -62,9 +73,13 @@ class MyBag extends Component {
                   justify="center"
                   direction="column"
                 >
-                  <Increment>+</Increment>
-                  <ItemCount>2</ItemCount>
-                  <Decrement>-</Decrement>
+                  <Increment onClick={() => this.props.increaseItem(product)}>
+                    +
+                  </Increment>
+                  <ItemCount>{product.qtx}</ItemCount>
+                  <Decrement onClick={() => this.props.decrementItem(product)}>
+                    -
+                  </Decrement>
                 </Group>
                 <ProductImage src={product.gallery[0]} />
               </ProductCount>
@@ -98,11 +113,14 @@ const mapStateToProps = (state) => {
     carts: state.carts.data,
     active: state.active.active,
     prices: state.carts.data.map((item) => item.prices),
+    currentSymbol: state.currencies.currentSymbol,
   };
 };
 const mapDispatchToprops = (dispatch) => {
   return {
     setActive: () => dispatch(setActive()),
+    increaseItem: (product) => dispatch(increaseItem(product)),
+    decrementItem: (product) => dispatch(decrementItem(product)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToprops)(MyBag);
