@@ -20,7 +20,6 @@ import { ItemCount } from "../my-bag/styles/my-bag";
 import {
   decrementItem,
   increaseItem,
-  updateProductInCart,
 } from "../../redux/action/addToCartAction";
 class AllCarts extends Component {
   //   componentDidMount() {
@@ -128,7 +127,6 @@ export const mapStateToProps = (state) => {
 };
 export const mapDispatchToProps = (dispatch) => {
   return {
-    updateProducrt: (product) => dispatch(updateProductInCart(product)),
     increaseItem: (product) => dispatch(increaseItem(product)),
     decrementItem: (product) => dispatch(decrementItem(product)),
   };

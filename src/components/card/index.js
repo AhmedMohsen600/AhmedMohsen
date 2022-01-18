@@ -12,14 +12,11 @@ import {
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/action/addToCartAction";
 import { Link } from "react-router-dom";
-import { productDetails } from "../../redux/action/detailsAction";
+// import { productDetails } from "../../redux/action/detailsAction";
 class Cart extends Component {
   render() {
     return (
-      <Card
-        active={this.props.inStock}
-        onClick={() => this.props.addProduct(this.props.product)}
-      >
+      <Card active={this.props.inStock}>
         <Link to={`/product/${this.props.product.id}`}>
           <Image src={this.props.src}>
             {/* {this.props.inStock ? null : <OutOfStock>OUT OF STOCK</OutOfStock>} */}
@@ -46,7 +43,6 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.product.data,
     currentSymbol: state.currencies.currentSymbol,
   };
 };
@@ -54,7 +50,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
-    addProduct: (product) => dispatch(productDetails(product)),
   };
 };
 

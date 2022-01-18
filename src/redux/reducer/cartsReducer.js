@@ -1,6 +1,5 @@
 import {
   ADD_TO_CART,
-  UPDATE_PRODUCT_CART,
   INCREMENT_ITEM,
   DECREMENT_ITEM,
 } from "../../constant/actions";
@@ -25,19 +24,6 @@ const cartsReducer = (state = initialState, action) => {
         data: [...state.data, { ...product, qtx: 1 }],
       };
 
-    case UPDATE_PRODUCT_CART:
-      const productIndex = state.data.findIndex(
-        (item) => item.id === product.id
-      );
-      if (productIndex) {
-        let cartData = state.data;
-        cartData[productIndex] = product;
-        return {
-          ...state,
-          data: cartData,
-        };
-      }
-      break;
     case INCREMENT_ITEM:
       if (exist) {
         const newData = state.data.map((item) =>

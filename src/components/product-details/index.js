@@ -23,12 +23,16 @@ import {
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/action/addToCartAction";
 import btnData from "../../fixtures/btn-size.json";
+import { getProduct } from "../../redux/action/getProductAction";
+
 class ProductDetails extends Component {
   state = {
     size: "xs",
     src: "",
   };
-
+  componentDidMount() {
+    this.props.getProduct(window.location.href.slice(30));
+  }
   render() {
     return (
       <Container>
@@ -77,11 +81,12 @@ class ProductDetails extends Component {
                   <PriceText>PRICE:</PriceText>
                   <ProductPrice>
                     {this.props.currentSymbol}
-                    {
-                      this.props.product.prices.find(
-                        (pr) => pr.currency.symbol === this.props.currentSymbol
-                      ).amount
-                    }
+                    {this.props.product.prices.length
+                      ? this.props.product.prices.find(
+                          (pr) =>
+                            pr.currency.symbol === this.props.currentSymbol
+                        ).amount
+                      : "0"}
                   </ProductPrice>
                   <AddToCartBtn
                     onClick={() => {
@@ -110,13 +115,14 @@ class ProductDetails extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    product: state.product.data,
     currentSymbol: state.currencies.currentSymbol,
+    product: state.product.data,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
+    getProduct: (id) => dispatch(getProduct(id)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
