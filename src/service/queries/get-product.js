@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_PRODUCT = gql`
-  query mama($id: String!) {
+  query ($id: String!) {
     product(id: $id) {
       id
       name
@@ -11,6 +11,13 @@ export const GET_PRODUCT = gql`
       category
       attributes {
         id
+        name
+        type
+        items {
+          id
+          value
+          displayValue
+        }
       }
       prices {
         currency {

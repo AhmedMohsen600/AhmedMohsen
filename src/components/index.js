@@ -7,3 +7,4 @@ export { default as EmptyCart } from "./empty-cart";
 export { default as Hero } from "./hero";
 export { default as AllCarts } from "./all-carts";
 export { default as ProductDetails } from "./product-details";
+export { default as ProductBox } from "./product-box";

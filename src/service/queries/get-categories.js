@@ -33,7 +33,3 @@ export const GET_CATEGORIES = gql`
     }
   }
 `;
-
-// export const GET_PRODUCT = gql`
-
-// `;

@@ -30,8 +30,8 @@ class Cart extends Component {
           <Price>
             {this.props.currentSymbol}
             {
-              this.props.price.find(
-                (pr) => pr.currency.symbol === this.props.currentSymbol
+              this.props.prices.find(
+                (price) => price.currency.symbol === this.props.currentSymbol
               ).amount
             }
           </Price>

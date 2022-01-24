@@ -52,21 +52,10 @@ class Header extends Component {
                   this.setState((prev) => ({
                     active: !prev.active,
                   }));
-                  this.props.setActive("close");
+                  // this.props.setActive("close");
                 }}
               >
                 {this.props.currentSymbol}
-                <DropDown active={this.state.active}>
-                  {this.props.currencies.map((currency) => (
-                    <div
-                      onClick={() => this.props.changeCurrency(currency.symbol)}
-                      key={currency.symbol}
-                    >
-                      {currency.symbol}
-                      {currency.label}
-                    </div>
-                  ))}
-                </DropDown>
                 <svg
                   style={{ cursor: "pointer" }}
                   width="8"
@@ -83,6 +72,17 @@ class Header extends Component {
                   />
                 </svg>
               </Symbol>
+              <DropDown active={this.state.active}>
+                {this.props.currencies.map((currency) => (
+                  <div
+                    onClick={() => this.props.changeCurrency(currency.symbol)}
+                    key={currency.symbol}
+                  >
+                    {currency.symbol}
+                    {currency.label}
+                  </div>
+                ))}
+              </DropDown>
             </Group>
             <EmptyCart />
           </Group>

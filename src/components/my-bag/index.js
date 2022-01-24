@@ -24,7 +24,19 @@ import {
   increaseItem,
 } from "../../redux/action/addToCartAction";
 class MyBag extends Component {
+  getTotalPrice = () => {
+    return this.props.carts
+      .reduce((prev, current) => {
+        const amount = current.prices.find(
+          (p) => p.currency.symbol === this.props.currentSymbol
+        ).amount;
+        return amount * current.qtx + prev;
+      }, 0)
+      .toFixed(2);
+  };
+
   render() {
+    // console.log(this.props.carts);
     return (
       <Container active={this.props.active} {...this.props}>
         <ProductsGroup>
@@ -94,7 +106,10 @@ class MyBag extends Component {
             direction="row"
           >
             <TotalPrice>Total</TotalPrice>
-            <TotalPrice>$500</TotalPrice>
+            <TotalPrice>
+              {this.props.currentSymbol}
+              {this.props.carts.length ? this.getTotalPrice() : 0}
+            </TotalPrice>
           </Group>
           <Group align="center" gap="16px">
             <ViewBag onClick={() => this.props.setActive()} to="/carts">

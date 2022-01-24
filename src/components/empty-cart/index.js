@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components/macro";
 import { connect } from "react-redux";
 import { setActive } from "../../redux/action/myBagAction";
+
 class EmptyCart extends Component {
   render() {
     return (
@@ -11,6 +12,7 @@ class EmptyCart extends Component {
         }}
         {...this.props}
       >
+        <RoundItemCount>{this.props.carts.length}</RoundItemCount>
         <svg
           style={{ cursor: "pointer", position: "relative" }}
           width="20"
@@ -37,11 +39,32 @@ class EmptyCart extends Component {
   }
 }
 
-const Div = styled.div``;
-
+const Div = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+export const RoundItemCount = styled.div`
+  position: absolute;
+  top: -40%;
+  right: -50%;
+  width: 20px;
+  height: 20px;
+  color: white;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 13px;
+`;
+const mapStateToProps = (state) => {
+  return {
+    carts: state.carts.data,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     setActive: () => dispatch(setActive()),
   };
 };
-export default connect(null, mapDispatchToProps)(EmptyCart);
+export default connect(mapStateToProps, mapDispatchToProps)(EmptyCart);

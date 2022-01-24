@@ -28,7 +28,7 @@ class Hero extends Component {
                   product={product}
                   src={product.gallery[0]}
                   name={product.name}
-                  price={product.prices}
+                  prices={product.prices}
                   key={product.id}
                 />
               )

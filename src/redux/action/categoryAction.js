@@ -7,14 +7,14 @@ export const loadCategories = () => async (dispatch) => {
     data: { categories },
   } = await client.query({ query: GET_CATEGORIES });
 
-  const categ = {};
+  const categoryObject = {};
   for (let category of categories) {
-    categ[category.name] = category;
+    categoryObject[category.name] = category;
   }
 
   dispatch({
     type: LOAD_CATEGORIES,
-    payload: categ,
+    payload: categoryObject,
   });
 };
 

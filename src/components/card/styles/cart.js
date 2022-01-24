@@ -7,12 +7,12 @@ export const Image = styled.div`
 `;
 
 export const CartIcon = styled.button`
-  background-color: #5ece7b;
-  width: 52px;
-  height: 52px;
   position: absolute;
   bottom: 10.5%;
   right: 1%;
+  background-color: #5ece7b;
+  width: 52px;
+  height: 52px;
   transform: translateY(-50%) translateX(-50%);
   transition: all 0.3s;
   opacity: 0;

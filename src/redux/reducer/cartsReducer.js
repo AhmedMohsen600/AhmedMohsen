@@ -8,24 +8,36 @@ import {
 const initialState = {
   data: [],
 };
+
 const cartsReducer = (state = initialState, action) => {
-  const product = action.payload;
-  const exist = state?.data?.find((item) => item?.id === product?.id);
+  const product = { ...action.payload };
+  const doesExistInCart = state?.data?.find((item) => item?.id === product?.id);
 
   switch (action.type) {
     case ADD_TO_CART:
       // if Prodcut Alredy Exsit do not add it again.
-      if (exist)
+      if (doesExistInCart) {
         return {
           ...state,
         };
+      }
+
+      // get the first
+      product.attributes = product.attributes.map((attr) => {
+        const attribute = { ...attr };
+        if (!attribute.selectedAttribute) {
+          attribute.selectedAttribute = attribute.items[0];
+        }
+        return attribute;
+      });
+
       return {
         ...state,
         data: [...state.data, { ...product, qtx: 1 }],
       };
 
     case INCREMENT_ITEM:
-      if (exist) {
+      if (doesExistInCart) {
         const newData = state.data.map((item) =>
           item.id === product.id ? { ...item, qtx: item.qtx + 1 } : item
         );
@@ -36,10 +48,10 @@ const cartsReducer = (state = initialState, action) => {
       }
       break;
     case DECREMENT_ITEM:
-      if (exist.qtx === 1)
+      if (doesExistInCart.qtx === 1)
         return {
           ...state,
-          data: state.data.filter((item) => item.id !== exist.id),
+          data: state.data.filter((item) => item.id !== doesExistInCart.id),
         };
       else
         return {
@@ -48,7 +60,6 @@ const cartsReducer = (state = initialState, action) => {
             item.id === product.id ? { ...item, qtx: item.qtx - 1 } : item
           ),
         };
-
     default:
       return {
         ...state,

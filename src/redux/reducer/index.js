@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 import categoriesReducer from "./categoriesReducer";
 import cartsReducer from "./cartsReducer";
 import myBagReducer from "./myBadReducer";
-
 import currenciesReducer from "./currenciesReducer";
 import productReducer from "./productReducer";
 const rootReducers = combineReducers({

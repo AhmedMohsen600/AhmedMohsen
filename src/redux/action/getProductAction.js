@@ -6,13 +6,24 @@ export const getProduct = (id) => async (dispatch) => {
     data: { product },
   } = await client.query({
     query: GET_PRODUCT,
+    fetchPolicy: "no-cache",
     variables: {
       id,
     },
   });
-  //   console.log(product);
+
   dispatch({
     type: PRODUCT,
-    payload: product,
+    payload: {
+      product,
+      isLoading: true,
+    },
+  });
+};
+
+export const updateProduct = (updatedProduct) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_PRODUCT",
+    payload: updatedProduct,
   });
 };

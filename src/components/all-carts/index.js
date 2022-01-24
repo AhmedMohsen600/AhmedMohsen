@@ -8,45 +8,24 @@ import {
   Product,
   Image,
   Title,
-  SizeBtn,
   DecrementBtn,
   IncrementBtn,
   Group,
   DetailsHolder,
   ImageHolder,
+  AttriBox,
 } from "./styles/all-carts";
-import { connect } from "react-redux";
+import { PriceText, SizeText } from "../product-details/styles/product-details";
+import { ColorBox } from "../product-details/styles/product-details";
 import { ItemCount } from "../my-bag/styles/my-bag";
+
 import {
   decrementItem,
   increaseItem,
 } from "../../redux/action/addToCartAction";
-class AllCarts extends Component {
-  //   componentDidMount() {
-  //     console.log(this.props);
-  //   }
-  state = {
-    size: "m",
-  };
-  obj = [
-    {
-      name: "XS",
-      size: "xs",
-    },
-    {
-      name: "S",
-      size: "s",
-    },
-    {
-      name: "M",
-      size: "m",
-    },
-    {
-      name: "L",
-      size: "l",
-    },
-  ];
+import { connect } from "react-redux";
 
+class AllCarts extends Component {
   render() {
     return (
       <Container>
@@ -63,29 +42,54 @@ class AllCarts extends Component {
                   gap="24px"
                 >
                   <ProductDesc>{product.name}</ProductDesc>
-                  <ProductPrice>
-                    {this.props.currentSymbol}
-                    {Math.floor(
-                      product.prices.find(
-                        (price) =>
-                          price.currency.symbol === this.props.currentSymbol
-                      ).amount * product.qtx
-                    )}
-                  </ProductPrice>
-                  <Group
-                    alignItems="flex-start"
-                    justify="flex-start"
-                    direction="row"
-                    gap="12px"
-                  >
-                    {this.obj.map((ob) => (
-                      <SizeBtn
-                        key={ob.size}
-                        active={product.size === ob.size ? 1 : 0}
-                      >
-                        {ob.name}
-                      </SizeBtn>
-                    ))}
+                  <Group gap="12px" direction="column">
+                    <PriceText>Price</PriceText>
+                    <ProductPrice>
+                      {this.props.currentSymbol}
+                      {Math.floor(
+                        product.prices.find(
+                          (price) =>
+                            price.currency.symbol === this.props.currentSymbol
+                        ).amount * product.qtx
+                      )}
+                    </ProductPrice>
+                  </Group>
+
+                  <Group gap="12px" direction="column">
+                    {product.attributes
+                      ? product.attributes.map((attrib) => {
+                          if (attrib.type === "swatch") {
+                            return (
+                              <Group
+                                key={attrib.name}
+                                gap="12px"
+                                direction="column"
+                              >
+                                <SizeText>{attrib.name}</SizeText>
+                                <Group gap="12px">
+                                  <ColorBox
+                                    key={attrib.id}
+                                    bgColor={attrib.selectedAttribute.value}
+                                    active={attrib.selectedAttribute.value}
+                                  />
+                                </Group>
+                              </Group>
+                            );
+                          }
+                          return (
+                            <Group
+                              key={attrib.name}
+                              gap="12px"
+                              direction="column"
+                            >
+                              <SizeText>{attrib.name}</SizeText>
+                              <AttriBox active={attrib.selectedAttribute.value}>
+                                {attrib.selectedAttribute.value}
+                              </AttriBox>
+                            </Group>
+                          );
+                        })
+                      : null}
                   </Group>
                 </Group>
               </DetailsHolder>

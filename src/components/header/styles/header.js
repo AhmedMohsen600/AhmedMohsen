@@ -22,6 +22,7 @@ export const Group = styled.div`
   align-self: stretch;
   gap: ${({ gap }) => gap};
   flex: ${({ flex }) => flex};
+  position: ${({ position }) => position};
 `;
 
 export const CategoryName = styled.h4`
@@ -37,7 +38,7 @@ export const CategoryName = styled.h4`
 `;
 export const DropDown = styled.div`
   position: absolute;
-  top: 180%;
+  top: 100%;
   right: -100%;
   display: flex;
   flex-direction: column;
@@ -54,6 +55,7 @@ export const DropDown = styled.div`
   background: #ffffff;
   z-index: 5000;
   box-shadow: 0px 4px 35px 0px #a8acb030;
+  z-index: 50000000;
 `;
 
 export const Symbol = styled.div`
@@ -66,12 +68,6 @@ export const Symbol = styled.div`
   gap: 10px;
   position: relative;
   cursor: pointer;
-  /* &:hover ${DropDown} {
-    pointer-events: all;
-    transition: all 0.3s;
-    transform: translateY(0%);
-    opacity: 1;
-  } */
 `;
 
 export const OverLay = styled.div`

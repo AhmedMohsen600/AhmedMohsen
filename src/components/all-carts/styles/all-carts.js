@@ -62,6 +62,7 @@ export const DecrementBtn = styled.button`
   background: none;
   border: 1px solid #1d1f22;
   font-size: 20px;
+  cursor: pointer;
 `;
 
 export const IncrementBtn = styled(DecrementBtn)``;
@@ -91,4 +92,14 @@ export const DetailsHolder = styled.div`
 export const ImageHolder = styled.div`
   display: flex;
   gap: 12px;
+`;
+
+export const AttriBox = styled.div`
+  background-color: ${({ active }) => (active ? "black" : "transparent")};
+  color: ${({ active }) => (active ? "white" : "black")};
+  width: 63px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

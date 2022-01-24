@@ -75,3 +75,11 @@ export const AddToCartBtn = styled.button`
 export const TextDesc = styled.div`
   font: normal 400 16px/25.59px Roboto, sans-serif;
 `;
+
+export const ColorBox = styled.div`
+  width: 63px;
+  height: 45px;
+  background-color: ${({ bgColor }) => bgColor};
+  border: 1px solid black;
+  opacity: ${({ active }) => (active ? "1" : "0.4")};
+`;

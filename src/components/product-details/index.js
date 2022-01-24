@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   ProductName,
   ProductDesc,
-  SizeBtn,
   Group,
   ProductPrice,
 } from "../all-carts/styles/all-carts";
@@ -14,26 +13,43 @@ import {
   SmallImage,
   SmallImagesGroup,
   DetailsHolder,
-  SizeText,
   PriceText,
   AddToCartBtn,
   TextDesc,
   Product,
 } from "./styles/product-details";
+import ProductBox from "../product-box";
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/action/addToCartAction";
-import btnData from "../../fixtures/btn-size.json";
-import { getProduct } from "../../redux/action/getProductAction";
+import { getProduct, updateProduct } from "../../redux/action/getProductAction";
 
 class ProductDetails extends Component {
   state = {
-    size: "xs",
     src: "",
+    color: "",
   };
+
   componentDidMount() {
     this.props.getProduct(window.location.href.slice(30));
   }
+
+  changeAttribute = (selectedItem, attributeId) => {
+    console.log(selectedItem);
+    // console.log("COLOR", this.state.color);
+    const productObj = {
+      ...this.props.product,
+      attributes: this.props.product.attributes.map((attr) => {
+        const mappedAttribute = attr;
+        if (attributeId === attr.id)
+          mappedAttribute.selectedAttribute = selectedItem;
+        return mappedAttribute;
+      }),
+    };
+    this.props.updateProduct(productObj);
+  };
+
   render() {
+    // console.log(this.props.product);
     return (
       <Container>
         <Inner>
@@ -63,19 +79,17 @@ class ProductDetails extends Component {
                   <ProductName>{this.props.product.brand}</ProductName>
                   <ProductDesc>{this.props.product.name}</ProductDesc>
                 </Group>
-                <Group gap="8px" direction="column">
-                  <SizeText>SIZE:</SizeText>
-                  <Group gap="12px" direction="row">
-                    {btnData.map((size) => (
-                      <SizeBtn
-                        key={size.name}
-                        onClick={() => this.setState({ size: size.name })}
-                        active={this.state.size === size.name ? 1 : 0}
-                      >
-                        {size.text}
-                      </SizeBtn>
-                    ))}
-                  </Group>
+                <Group gap="12px" direction="column">
+                  {this.props.product.attributes.length
+                    ? this.props.product.attributes.map((attrib) => {
+                        return (
+                          <ProductBox
+                            onAttributeChange={this.changeAttribute}
+                            attrib={attrib}
+                          />
+                        );
+                      })
+                    : null}
                 </Group>
                 <Group direction="column" gap="20px">
                   <PriceText>PRICE:</PriceText>
@@ -89,13 +103,7 @@ class ProductDetails extends Component {
                       : "0"}
                   </ProductPrice>
                   <AddToCartBtn
-                    onClick={() => {
-                      const productObj = {
-                        ...this.props.product,
-                        size: this.state.size,
-                      };
-                      this.props.addToCart(productObj);
-                    }}
+                    onClick={() => this.props.addToCart(this.props.product)}
                   >
                     ADD TO CART
                   </AddToCartBtn>
@@ -114,15 +122,24 @@ class ProductDetails extends Component {
   }
 }
 const mapStateToProps = (state) => {
+  // setting the initial value for selecterAttribute before we use onAttributeChange function.
+  const product = state.product.data;
+  product.attributes.map((attr) => {
+    const mappedAttribute = attr;
+    if (!mappedAttribute.selectedAttribute)
+      mappedAttribute.selectedAttribute = attr.items[0];
+    return mappedAttribute;
+  });
   return {
     currentSymbol: state.currencies.currentSymbol,
-    product: state.product.data,
+    product: product,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
     getProduct: (id) => dispatch(getProduct(id)),
+    updateProduct: (updatedProduct) => dispatch(updateProduct(updatedProduct)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
