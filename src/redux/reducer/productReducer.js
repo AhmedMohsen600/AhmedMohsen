@@ -19,6 +19,15 @@ const prodcutReducer = (state = intitialState, action) => {
         ...state,
         data: action.payload,
       };
+    case "CLEAR_PRODUCT":
+      return {
+        ...state,
+        data: {
+          gallery: [],
+          prices: [],
+          attributes: [],
+        },
+      };
     default:
       return {
         ...state,

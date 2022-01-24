@@ -18,19 +18,26 @@ import {
   TextDesc,
   Product,
 } from "./styles/product-details";
-import ProductBox from "../product-box";
+import ProductBox from "../attributes-group";
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/action/addToCartAction";
-import { getProduct, updateProduct } from "../../redux/action/getProductAction";
+import {
+  clearProduct,
+  getProduct,
+  updateProduct,
+} from "../../redux/action/getProductAction";
 
 class ProductDetails extends Component {
   state = {
     src: "",
-    color: "",
   };
 
   componentDidMount() {
     this.props.getProduct(window.location.href.slice(30));
+  }
+
+  componentWillUnmount() {
+    this.props.clearProduct();
   }
 
   changeAttribute = (selectedItem, attributeId) => {
@@ -49,7 +56,6 @@ class ProductDetails extends Component {
   };
 
   render() {
-    // console.log(this.props.product);
     return (
       <Container>
         <Inner>
@@ -140,6 +146,7 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (product) => dispatch(addToCart(product)),
     getProduct: (id) => dispatch(getProduct(id)),
     updateProduct: (updatedProduct) => dispatch(updateProduct(updatedProduct)),
+    clearProduct: () => dispatch(clearProduct()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

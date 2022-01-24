@@ -15,10 +15,6 @@ class ProductBox extends Component {
 
   render() {
     console.log("Value", this.state.selectedAttribute.value);
-    // console.log(
-    //   "this.state.selectedAttribute.value",
-    //   this.state.selectedAttribute.value
-    // );
     return this.props.attrib.type === "swatch" ? (
       <Group key={this.props.attrib.name} gap="12px" direction="column">
         <SizeText>{this.props.attrib.name}</SizeText>

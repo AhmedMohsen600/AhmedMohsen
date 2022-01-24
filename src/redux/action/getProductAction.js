@@ -27,3 +27,9 @@ export const updateProduct = (updatedProduct) => (dispatch) => {
     payload: updatedProduct,
   });
 };
+
+export const clearProduct = () => (dispatch) => {
+  dispatch({
+    type: "CLEAR_PRODUCT",
+  });
+};
