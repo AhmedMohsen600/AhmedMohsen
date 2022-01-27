@@ -18,7 +18,7 @@ import {
   TextDesc,
   Product,
 } from "./styles/product-details";
-import ProductBox from "../attributes-group";
+import AttributesGroup from "../attributes-group";
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/action/addToCartAction";
 import {
@@ -37,12 +37,10 @@ class ProductDetails extends Component {
   }
 
   componentWillUnmount() {
-    this.props.clearProduct();
+    this.props.cleanProduct();
   }
 
   changeAttribute = (selectedItem, attributeId) => {
-    console.log(selectedItem);
-    // console.log("COLOR", this.state.color);
     const productObj = {
       ...this.props.product,
       attributes: this.props.product.attributes.map((attr) => {
@@ -61,16 +59,13 @@ class ProductDetails extends Component {
         <Inner>
           <Product>
             <SmallImagesGroup>
-              {this.props.product.gallery.map((src, index) => {
-                if (index > 4) return null;
-                return (
-                  <SmallImage
-                    onClick={() => this.setState({ src })}
-                    key={index}
-                    src={src}
-                  />
-                );
-              })}
+              {this.props.product.gallery.map((src, index) => (
+                <SmallImage
+                  onClick={() => this.setState({ src })}
+                  key={index}
+                  src={src}
+                />
+              ))}
             </SmallImagesGroup>
             <ContentHolder>
               <BigImage
@@ -85,18 +80,19 @@ class ProductDetails extends Component {
                   <ProductName>{this.props.product.brand}</ProductName>
                   <ProductDesc>{this.props.product.name}</ProductDesc>
                 </Group>
-                <Group gap="12px" direction="column">
-                  {this.props.product.attributes.length
-                    ? this.props.product.attributes.map((attrib) => {
-                        return (
-                          <ProductBox
-                            onAttributeChange={this.changeAttribute}
-                            attrib={attrib}
-                          />
-                        );
-                      })
-                    : null}
-                </Group>
+                {this.props.product.attributes.length ? (
+                  <Group gap="12px" direction="column">
+                    {this.props.product.attributes.map((attrib) => {
+                      return (
+                        <AttributesGroup
+                          key={attrib.id}
+                          onAttributeChange={this.changeAttribute}
+                          attrib={attrib}
+                        />
+                      );
+                    })}
+                  </Group>
+                ) : null}
                 <Group direction="column" gap="20px">
                   <PriceText>PRICE:</PriceText>
                   <ProductPrice>
@@ -146,7 +142,7 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (product) => dispatch(addToCart(product)),
     getProduct: (id) => dispatch(getProduct(id)),
     updateProduct: (updatedProduct) => dispatch(updateProduct(updatedProduct)),
-    clearProduct: () => dispatch(clearProduct()),
+    cleanProduct: () => dispatch(clearProduct()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

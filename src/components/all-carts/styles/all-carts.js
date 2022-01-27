@@ -67,10 +67,9 @@ export const DecrementBtn = styled.button`
 
 export const IncrementBtn = styled(DecrementBtn)``;
 
-export const Image = styled.div`
+export const Image = styled.img`
   background: url(${({ src }) => src}) center / contain no-repeat;
   width: 141px;
-  height: 1005;
 `;
 
 export const Group = styled.div`

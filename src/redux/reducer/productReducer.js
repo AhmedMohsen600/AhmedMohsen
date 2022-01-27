@@ -1,4 +1,8 @@
-import { GET_PRODUCT } from "../../constant/actions";
+import {
+  GET_PRODUCT,
+  UPDATE_PRODUCT,
+  CLEAN_PRODUCT,
+} from "../../constant/actions";
 const intitialState = {
   data: {
     gallery: [],
@@ -14,12 +18,12 @@ const prodcutReducer = (state = intitialState, action) => {
         ...state,
         data: action.payload.product,
       };
-    case "UPDATE_PRODUCT":
+    case UPDATE_PRODUCT:
       return {
         ...state,
         data: action.payload,
       };
-    case "CLEAR_PRODUCT":
+    case CLEAN_PRODUCT:
       return {
         ...state,
         data: {

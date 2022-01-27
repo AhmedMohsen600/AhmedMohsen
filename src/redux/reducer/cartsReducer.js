@@ -11,18 +11,23 @@ const initialState = {
 
 const cartsReducer = (state = initialState, action) => {
   const product = { ...action.payload };
-  const doesExistInCart = state?.data?.find((item) => item?.id === product?.id);
-
+  const doesExistInCart = state.data.find((item) => item.id === product.id);
+  // const attributes = state.data.map((item) => item.attributes);
   switch (action.type) {
     case ADD_TO_CART:
-      // if Prodcut Alredy Exsit do not add it again.
+      // if Prodcut Alredy Exsit increase the qtx.
       if (doesExistInCart) {
+        const newData = state.data.map((item) =>
+          item.id === product.id ? { ...item, qtx: item.qtx + 1 } : item
+        );
+
         return {
           ...state,
+          data: newData,
         };
       }
 
-      // get the first
+      // get the first value of items if selectedAttribute is empty.
       product.attributes = product.attributes.map((attr) => {
         const attribute = { ...attr };
         if (!attribute.selectedAttribute) {
@@ -68,14 +73,3 @@ const cartsReducer = (state = initialState, action) => {
 };
 
 export default cartsReducer;
-
-// state.map((item) => (item.id === product.id ? { ...state } : item));
-
-// const nextState = produce(state, (draft) => {
-//   const index = draft.data.findIndex((item) => item.id === product.id);
-//   const item = draft.data[index];
-//   if (index !== -1) {
-//     draft.data[index] = { ...item, qtx: !item.qtx ? 2 : item.qtx + 1 };
-//   }
-// });
-// return state;

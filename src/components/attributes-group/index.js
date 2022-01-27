@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { SizeBtn, Group } from "./styles/product-box";
 import { SizeText, ColorBox } from "../product-details/styles/product-details";
-class ProductBox extends Component {
+class AttributesGroup extends Component {
   state = {
     selectedAttribute: this.props.attrib.selectedAttribute,
   };
@@ -14,7 +14,6 @@ class ProductBox extends Component {
   };
 
   render() {
-    console.log("Value", this.state.selectedAttribute.value);
     return this.props.attrib.type === "swatch" ? (
       <Group key={this.props.attrib.name} gap="12px" direction="column">
         <SizeText>{this.props.attrib.name}</SizeText>
@@ -54,4 +53,4 @@ class ProductBox extends Component {
   }
 }
 
-export default ProductBox;
+export default AttributesGroup;

@@ -6,7 +6,6 @@ import {
   ProductPrice,
   ProductDesc,
   Product,
-  Image,
   Title,
   DecrementBtn,
   IncrementBtn,
@@ -18,7 +17,7 @@ import {
 import { PriceText, SizeText } from "../product-details/styles/product-details";
 import { ColorBox } from "../product-details/styles/product-details";
 import { ItemCount } from "../my-bag/styles/my-bag";
-
+import ImageSlider from "../image-slider";
 import {
   decrementItem,
   increaseItem,
@@ -26,6 +25,14 @@ import {
 import { connect } from "react-redux";
 
 class AllCarts extends Component {
+  getPriceDependingOnCurrency(product) {
+    const price =
+      product.prices.find(
+        (price) => price.currency.symbol === this.props.currentSymbol
+      ).amount * product.qtx;
+
+    return price.toFixed(2);
+  }
   render() {
     return (
       <Container>
@@ -46,50 +53,39 @@ class AllCarts extends Component {
                     <PriceText>Price</PriceText>
                     <ProductPrice>
                       {this.props.currentSymbol}
-                      {Math.floor(
-                        product.prices.find(
-                          (price) =>
-                            price.currency.symbol === this.props.currentSymbol
-                        ).amount * product.qtx
-                      )}
+                      {this.getPriceDependingOnCurrency(product)}
                     </ProductPrice>
                   </Group>
 
                   <Group gap="12px" direction="column">
-                    {product.attributes
-                      ? product.attributes.map((attrib) => {
-                          if (attrib.type === "swatch") {
-                            return (
-                              <Group
-                                key={attrib.name}
-                                gap="12px"
-                                direction="column"
-                              >
-                                <SizeText>{attrib.name}</SizeText>
-                                <Group gap="12px">
-                                  <ColorBox
-                                    key={attrib.id}
-                                    bgColor={attrib.selectedAttribute.value}
-                                    active={attrib.selectedAttribute.value}
-                                  />
-                                </Group>
-                              </Group>
-                            );
-                          }
-                          return (
-                            <Group
-                              key={attrib.name}
-                              gap="12px"
-                              direction="column"
-                            >
-                              <SizeText>{attrib.name}</SizeText>
-                              <AttriBox active={attrib.selectedAttribute.value}>
-                                {attrib.selectedAttribute.value}
-                              </AttriBox>
+                    {product.attributes.map((attrib) => {
+                      if (attrib.type === "swatch") {
+                        return (
+                          <Group
+                            key={attrib.name}
+                            gap="12px"
+                            direction="column"
+                          >
+                            <SizeText>{attrib.name}</SizeText>
+                            <Group gap="12px">
+                              <ColorBox
+                                key={attrib.id}
+                                bgColor={attrib.selectedAttribute.value}
+                                active={attrib.selectedAttribute.value}
+                              />
                             </Group>
-                          );
-                        })
-                      : null}
+                          </Group>
+                        );
+                      }
+                      return (
+                        <Group key={attrib.name} gap="12px" direction="column">
+                          <SizeText>{attrib.name}</SizeText>
+                          <AttriBox active={attrib.selectedAttribute.value}>
+                            {attrib.selectedAttribute.value}
+                          </AttriBox>
+                        </Group>
+                      );
+                    })}
                   </Group>
                 </Group>
               </DetailsHolder>
@@ -113,7 +109,8 @@ class AllCarts extends Component {
                     -
                   </DecrementBtn>
                 </Group>
-                <Image src={product.gallery[0]} />
+
+                <ImageSlider images={product.gallery} />
               </ImageHolder>
             </Product>
           ))}

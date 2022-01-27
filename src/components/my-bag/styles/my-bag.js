@@ -9,7 +9,7 @@ export const Container = styled.div`
   transition: all 0.5s ease;
   position: absolute;
   background-color: white;
-  top: 100%;
+  top: 99.3%;
   right: 2.8%;
   opacity: ${({ active }) => (active ? "1" : "0")};
   transform: ${({ active }) => (active ? "scale(1)" : "scale(0.4)")};
@@ -42,7 +42,7 @@ export const Product = styled.div`
 export const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
 `;
 
 export const ProductName = styled.h4`
@@ -64,10 +64,23 @@ export const ProductSize = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  border: 1px solid #1d1f22;
+  cursor: pointer;
+  background-color: ${({ active }) => (active ? "black" : "white")};
+  font-size: 12px;
+  color: ${({ active }) => (active ? "white" : "black")};
+`;
+export const ColorBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 24px;
   height: 24px;
   border: 1px solid #1d1f22;
   cursor: pointer;
+  background-color: ${({ bgColor }) => bgColor};
 `;
 export const ProductCount = styled.div`
   display: flex;
@@ -95,9 +108,17 @@ export const Group = styled.div`
   width: ${({ width }) => width};
 `;
 
-export const Decrement = styled(ProductSize)``;
+export const Decrement = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #1d1f22;
+  cursor: pointer;
+`;
 
-export const Increment = styled(ProductSize)``;
+export const Increment = styled(Decrement)``;
 
 export const CheckOut = styled.button`
   padding: 16px 32px;

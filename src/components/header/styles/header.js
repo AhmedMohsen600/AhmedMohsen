@@ -7,28 +7,29 @@ export const Container = styled.header`
 
 export const Nav = styled.nav`
   width: 94%;
-  margin: auto;
-  padding-top: 15px;
-  min-height: 2vh;
+  margin: 0 auto;
+  padding-top: 10px;
+  min-height: 8.7vh;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const Group = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: stretch;
+  align-self: ${({ alignSelf }) => alignSelf};
   gap: ${({ gap }) => gap};
   flex: ${({ flex }) => flex};
   position: ${({ position }) => position};
+  padding-top: ${({ paddingTop }) => paddingTop};
 `;
 
 export const CategoryName = styled.h4`
-  padding: 0 24px 0 24px;
+  padding: 0 24px;
   cursor: pointer;
-  padding-top: 10px;
+  padding-top: 9px;
   font-size: 16px;
   align-self: stretch;
   font-weight: 400;
@@ -36,22 +37,22 @@ export const CategoryName = styled.h4`
   border-bottom: 1px solid
     ${({ active }) => (active ? "#5ECE7B" : "transparent")};
 `;
+
 export const DropDown = styled.div`
   position: absolute;
-  top: 100%;
+  top: 160%;
   right: -100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 21px;
+  gap: 11px;
   opacity: ${({ active }) => (active ? 1 : 0)};
   pointer-events: ${({ active }) => (active ? "all" : "none")};
   transform: ${({ active }) =>
     active ? "translateY(0%)" : "translateY(-10%)"};
   transition: all 0.5s;
   width: 114px;
-  padding: 10px 0;
   background: #ffffff;
   z-index: 5000;
   box-shadow: 0px 4px 35px 0px #a8acb030;
@@ -82,6 +83,25 @@ export const OverLay = styled.div`
   transition: all 0.5s;
   pointer-events: ${({ active }) => (active ? "all" : "none")};
   z-index: 999;
+`;
+
+export const CurrencyGroup = styled.div`
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 0;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: #f1f1f1;
+  }
+`;
+
+export const CurrencyText = styled.span`
+  font-size: 18px;
+  font-weight: 500;
 `;
 
 export const LockBody = createGlobalStyle`

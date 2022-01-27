@@ -9,6 +9,8 @@ import {
   OverLay,
   LockBody,
   DropDown,
+  CurrencyGroup,
+  CurrencyText,
 } from "./styles/header";
 import { connect } from "react-redux";
 import { changeCategory } from "../../redux/action/categoryAction";
@@ -30,7 +32,7 @@ class Header extends Component {
     return (
       <Container>
         <Nav>
-          <Group>
+          <Group alignSelf="stretch">
             {headerItems.map((item) => (
               <CategoryName
                 key={item.name}
@@ -45,7 +47,7 @@ class Header extends Component {
             ))}
           </Group>
           <Logo />
-          <Group gap="22px">
+          <Group paddingTop="10px" gap="22px">
             <Group position="relative" gap="8px">
               <Symbol
                 onClick={() => {
@@ -55,7 +57,7 @@ class Header extends Component {
                   // this.props.setActive("close");
                 }}
               >
-                {this.props.currentSymbol}
+                <CurrencyText>{this.props.currentSymbol}</CurrencyText>
                 <svg
                   style={{ cursor: "pointer" }}
                   width="8"
@@ -74,13 +76,16 @@ class Header extends Component {
               </Symbol>
               <DropDown active={this.state.active}>
                 {this.props.currencies.map((currency) => (
-                  <div
-                    onClick={() => this.props.changeCurrency(currency.symbol)}
+                  <CurrencyGroup
+                    onClick={() => {
+                      this.props.changeCurrency(currency.symbol);
+                      this.setState({ active: false });
+                    }}
                     key={currency.symbol}
                   >
-                    {currency.symbol}
-                    {currency.label}
-                  </div>
+                    <CurrencyText>{currency.symbol}</CurrencyText>
+                    <CurrencyText>{currency.label}</CurrencyText>
+                  </CurrencyGroup>
                 ))}
               </DropDown>
             </Group>

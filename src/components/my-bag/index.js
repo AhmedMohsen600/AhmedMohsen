@@ -16,7 +16,9 @@ import {
   ViewBag,
   CheckOut,
   TotalPrice,
+  ColorBox,
 } from "./styles/my-bag";
+// import AtttributesGroup from "../attributes-group";
 import { connect } from "react-redux";
 import { setActive } from "../../redux/action/myBagAction";
 import {
@@ -36,7 +38,6 @@ class MyBag extends Component {
   };
 
   render() {
-    // console.log(this.props.carts);
     return (
       <Container active={this.props.active} {...this.props}>
         <ProductsGroup>
@@ -65,18 +66,37 @@ class MyBag extends Component {
                   <ProductName>{product.name}</ProductName>
                   <ProductPrice>
                     {this.props.currentSymbol}
-                    {Math.floor(
-                      product.prices.find(
+                    {product.prices
+                      .find(
                         (price) =>
                           price.currency.symbol === this.props.currentSymbol
-                      ).amount * product.qtx
-                    )}
+                      )
+                      .amount.toFixed(2)}
                   </ProductPrice>
                 </Group>
-                <Group align="center" gap="8px" direction="row">
-                  <ProductSize>S</ProductSize>
-                  <ProductSize>M</ProductSize>
-                </Group>
+                {product.attributes.map((attrib) => {
+                  return attrib.type === "swatch" ? (
+                    <Group key={attrib.id} direction="column" gap="8px">
+                      <ProductPrice>{attrib.name}</ProductPrice>
+                      <Group align="center" gap="8px" direction="row">
+                        <ColorBox bgColor={attrib.selectedAttribute.value} />
+                      </Group>
+                    </Group>
+                  ) : (
+                    <Group key={attrib.id} direction="column" gap="8px">
+                      <ProductPrice>{attrib.name}</ProductPrice>
+                      <Group align="center" gap="8px" direction="row">
+                        <ProductSize
+                          height={attrib.name === "Size" ? "23px" : "30px"}
+                          width={attrib.name === "Size" ? "23px" : "42px"}
+                          active={attrib.selectedAttribute.value}
+                        >
+                          {attrib.selectedAttribute.value}
+                        </ProductSize>
+                      </Group>
+                    </Group>
+                  );
+                })}
               </ProductDetails>
               <ProductCount>
                 <Group

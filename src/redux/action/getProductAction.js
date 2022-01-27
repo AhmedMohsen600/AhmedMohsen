@@ -1,6 +1,10 @@
 import { client } from "../../service/apollo";
 import { GET_PRODUCT } from "../../service/queries/get-product";
-import { GET_PRODUCT as PRODUCT } from "../../constant/actions";
+import {
+  GET_PRODUCT as PRODUCT,
+  CLEAN_PRODUCT,
+  UPDATE_PRODUCT,
+} from "../../constant/actions";
 export const getProduct = (id) => async (dispatch) => {
   const {
     data: { product },
@@ -23,13 +27,13 @@ export const getProduct = (id) => async (dispatch) => {
 
 export const updateProduct = (updatedProduct) => (dispatch) => {
   dispatch({
-    type: "UPDATE_PRODUCT",
+    type: UPDATE_PRODUCT,
     payload: updatedProduct,
   });
 };
 
 export const clearProduct = () => (dispatch) => {
   dispatch({
-    type: "CLEAR_PRODUCT",
+    type: CLEAN_PRODUCT,
   });
 };
