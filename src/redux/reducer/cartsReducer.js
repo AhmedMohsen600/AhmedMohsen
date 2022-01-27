@@ -3,7 +3,6 @@ import {
   INCREMENT_ITEM,
   DECREMENT_ITEM,
 } from "../../constant/actions";
-// import produce from "immer";
 
 const initialState = {
   data: [],
@@ -27,7 +26,7 @@ const cartsReducer = (state = initialState, action) => {
         };
       }
 
-      // get the first value of items if selectedAttribute is empty.
+      // set the value of selectedAttributes to the first value of items if it empty.
       product.attributes = product.attributes.map((attr) => {
         const attribute = { ...attr };
         if (!attribute.selectedAttribute) {
