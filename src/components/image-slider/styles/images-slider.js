@@ -14,21 +14,21 @@ export const ImageHolder = styled.div`
 `;
 
 export const RightArrow = styled.div`
-  width: 8px;
-  height: 14px;
-  background-color: black;
-  background: url("/images/right-arrow.svg") center / contain no-repeat;
+  width: 15px;
+  height: 15px;
+  background: url("/images/right-arrow.svg") center / cover no-repeat;
   position: absolute;
   top: 50%;
   right: 10px;
   z-index: 10000;
-  background-color: black;
   cursor: pointer;
   user-select: none;
+  border-radius: 50%;
+  background-color: gray;
 `;
 
 export const LeftArrow = styled(RightArrow)`
   left: 10px;
   background: url("/images/left-arrow.svg") center / contain no-repeat;
-  background-color: black;
+  background-color: gray;
 `;

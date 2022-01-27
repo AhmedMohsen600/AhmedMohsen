@@ -91,6 +91,7 @@ export const DetailsHolder = styled.div`
 export const ImageHolder = styled.div`
   display: flex;
   gap: 12px;
+  height: 220px;
 `;
 
 export const AttriBox = styled.div`
