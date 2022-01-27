@@ -82,4 +82,5 @@ export const ColorBox = styled.div`
   background-color: ${({ bgColor }) => bgColor};
   border: 1px solid black;
   opacity: ${({ active }) => (active ? "1" : "0.4")};
+  cursor: pointer;
 `;
