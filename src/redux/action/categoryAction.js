@@ -5,7 +5,7 @@ import { LOAD_CATEGORIES, CHANGE_CATEGORY } from "../../constant/actions";
 export const loadCategories = () => async (dispatch) => {
   const {
     data: { categories },
-  } = await client.query({ query: GET_CATEGORIES });
+  } = await client.query({ query: GET_CATEGORIES, fetchPolicy: "no-cache" });
 
   const categoryObject = {};
   for (let category of categories) {
