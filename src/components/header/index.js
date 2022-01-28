@@ -15,7 +15,7 @@ import {
 import { connect } from "react-redux";
 import { changeCategory } from "../../redux/action/categoryAction";
 import headerItems from "../../fixtures/header-items.json";
-import { setActive } from "../../redux/action/myBagAction";
+import { setActive, setDropdown } from "../../redux/action/myBagAction";
 import {
   loadCurrencies,
   setCurrentCurrency,
@@ -23,11 +23,12 @@ import {
 class Header extends Component {
   state = {
     category: "all",
-    active: false,
   };
+
   componentDidMount() {
     this.props.getCurrencies();
   }
+
   render() {
     return (
       <Container>
@@ -49,14 +50,7 @@ class Header extends Component {
           <Logo />
           <Group paddingTop="10px" gap="22px">
             <Group position="relative" gap="8px">
-              <Symbol
-                onClick={() => {
-                  this.setState((prev) => ({
-                    active: !prev.active,
-                  }));
-                  // this.props.setActive("close");
-                }}
-              >
+              <Symbol onClick={() => this.props.setDropdown()}>
                 <CurrencyText>{this.props.currentSymbol}</CurrencyText>
                 <svg
                   style={{ cursor: "pointer" }}
@@ -74,12 +68,12 @@ class Header extends Component {
                   />
                 </svg>
               </Symbol>
-              <DropDown active={this.state.active}>
+              <DropDown active={this.props.activeDrop}>
                 {this.props.currencies.map((currency) => (
                   <CurrencyGroup
-                    onClick={() => {
+                    onClick={(e) => {
                       this.props.changeCurrency(currency.symbol);
-                      this.setState({ active: false });
+                      this.props.setDropdown("close");
                     }}
                     key={currency.symbol}
                   >
@@ -93,7 +87,13 @@ class Header extends Component {
           </Group>
         </Nav>
         <MyBag />
-        <OverLay active={this.props.active} />
+        <OverLay
+          onClick={() => {
+            this.props.setActive();
+            this.props.setDropdown("close");
+          }}
+          active={this.props.active}
+        />
         {this.props.active ? <LockBody /> : null}
       </Container>
     );
@@ -102,6 +102,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     active: state.active.active,
+    activeDrop: state.active.activeDrop,
     currencies: state.currencies.data,
     currentSymbol: state.currencies.currentSymbol,
   };
@@ -110,9 +111,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCategory: (category) => dispatch(changeCategory(category)),
-    setActive: (pay) => dispatch(setActive(pay)),
+    setActive: () => dispatch(setActive()),
     getCurrencies: () => dispatch(loadCurrencies()),
     changeCurrency: (currency) => dispatch(setCurrentCurrency(currency)),
+    setDropdown: (close) => dispatch(setDropdown(close)),
   };
 };
 

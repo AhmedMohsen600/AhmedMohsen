@@ -9,3 +9,4 @@ export const GET_CURRENCY = "GET_CURRENCY";
 export const GET_PRODUCT = "GET_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const CLEAN_PRODUCT = "CLEAN_PRODUCT";
+export const ACTIVE_DROPDOWN = "ACTIVE_DROPDOWN";

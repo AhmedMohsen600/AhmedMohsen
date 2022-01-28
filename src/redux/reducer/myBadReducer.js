@@ -1,7 +1,8 @@
-import { ACTIVE } from "../../constant/actions";
+import { ACTIVE, ACTIVE_DROPDOWN } from "../../constant/actions";
 
 const initialState = {
   active: false,
+  activeDrop: false,
 };
 
 const myBagReducer = (state = initialState, action) => {
@@ -9,7 +10,12 @@ const myBagReducer = (state = initialState, action) => {
     case ACTIVE:
       return {
         ...state,
-        active: action.payload === "close" ? false : !state.active,
+        active: !state.active,
+      };
+    case ACTIVE_DROPDOWN:
+      return {
+        ...state,
+        activeDrop: action.payload === "close" ? false : !state.activeDrop,
       };
     default:
       return {

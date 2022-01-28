@@ -1,8 +1,14 @@
-import { ACTIVE } from "../../constant/actions";
+import { ACTIVE, ACTIVE_DROPDOWN } from "../../constant/actions";
 
-export const setActive = (isActive) => (dispatch) => {
+export const setActive = () => (dispatch) => {
   dispatch({
     type: ACTIVE,
+  });
+};
+
+export const setDropdown = (isActive) => (dispatch) => {
+  dispatch({
+    type: ACTIVE_DROPDOWN,
     payload: isActive,
   });
 };

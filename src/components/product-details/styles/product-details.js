@@ -65,11 +65,13 @@ export const ContentHolder = styled.div`
 export const PriceText = styled(SizeText)``;
 
 export const AddToCartBtn = styled.button`
-  background-color: #5ece7b;
+  background-color: ${({ inStock }) => (inStock ? "#5ece7b" : "red")};
   color: white;
   padding: 16px 32px 16px 32px;
   border: 0;
   cursor: pointer;
+  opacity: ${({ inStock }) => (inStock ? 1 : 0.5)};
+  pointer-events: ${({ inStock }) => (inStock ? "all" : "none")};
 `;
 
 export const TextDesc = styled.div`
