@@ -24,13 +24,6 @@ export const Group = styled.div`
   flex: ${({ flex }) => flex};
   position: ${({ position }) => position};
   padding-top: ${({ paddingTop }) => paddingTop};
-  .categ-name {
-    text-decoration: none;
-    align-self: stretch;
-    color: ${({ active }) => (active ? "#5ECE7B" : "#1d1f22")};
-    border-bottom: 1px solid
-      ${({ active }) => (active ? "#5ECE7B" : "transparent")};
-  }
 `;
 
 export const CategoryName = styled(Link)`

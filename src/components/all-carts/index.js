@@ -39,7 +39,7 @@ class AllCarts extends Component {
         <Inner>
           <Title>Cart</Title>
           {this.props.carts.map((product) => (
-            <Product key={product.name}>
+            <Product key={product.cartKey}>
               <DetailsHolder>
                 <ProductName>{product.brand}</ProductName>
                 <Group
@@ -56,20 +56,19 @@ class AllCarts extends Component {
                       {this.getPriceDependingOnCurrency(product)}
                     </ProductPrice>
                   </Group>
-
                   <Group gap="12px" direction="column">
                     {product.attributes.map((attrib) => {
                       if (attrib.type === "swatch") {
                         return (
                           <Group
-                            key={attrib.name}
+                            key={attrib.selectedAttribute.id}
                             gap="12px"
                             direction="column"
                           >
                             <SizeText>{attrib.name}</SizeText>
                             <Group gap="12px">
                               <ColorBox
-                                key={attrib.id}
+                                key={attrib.selectedAttribute.id}
                                 bgColor={attrib.selectedAttribute.value}
                                 active={attrib.selectedAttribute.value}
                               />
@@ -78,7 +77,11 @@ class AllCarts extends Component {
                         );
                       }
                       return (
-                        <Group key={attrib.name} gap="12px" direction="column">
+                        <Group
+                          key={attrib.selectedAttribute.id}
+                          gap="12px"
+                          direction="column"
+                        >
                           <SizeText>{attrib.name}</SizeText>
                           <AttriBox active={attrib.selectedAttribute.value}>
                             {attrib.selectedAttribute.value}

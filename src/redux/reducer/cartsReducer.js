@@ -40,14 +40,14 @@ const cartsReducer = (state = initialState, action) => {
     case ADD_TO_CART:
       // if Prodcut Alredy Exsit increase the qtx.
       if (doesExistInCart) {
-        const newData = state.data.map((item) =>
+        const updateData = state.data.map((item) =>
           item.cartKey === product.cartKey
             ? { ...item, qtx: item.qtx + 1 }
             : item
         );
         return {
           ...state,
-          data: newData,
+          data: updateData,
         };
       }
 
@@ -58,14 +58,14 @@ const cartsReducer = (state = initialState, action) => {
 
     case INCREMENT_ITEM:
       if (doesExistInCart) {
-        const newData = state.data.map((item) =>
+        const updateData = state.data.map((item) =>
           item.cartKey === product.cartKey
             ? { ...item, qtx: item.qtx + 1 }
             : item
         );
         return {
           ...state,
-          data: newData,
+          data: updateData,
         };
       }
       break;
