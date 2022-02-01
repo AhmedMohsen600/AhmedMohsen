@@ -33,9 +33,7 @@ const prodcutReducer = (state = intitialState, action) => {
         },
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 };
 

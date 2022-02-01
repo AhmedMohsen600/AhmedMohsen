@@ -17,6 +17,8 @@ import {
   CheckOut,
   TotalPrice,
   ColorBox,
+  Span,
+  Text,
 } from "./styles/my-bag";
 // import AtttributesGroup from "../attributes-group";
 import { connect } from "react-redux";
@@ -36,26 +38,23 @@ class MyBag extends Component {
       }, 0)
       .toFixed(2);
   };
-
+  getItemsCount = () => {
+    return this.props.carts.reduce((prev, current) => {
+      const qtx = current.qtx;
+      return qtx + prev;
+    }, 0);
+  };
   render() {
     return (
       <Container active={this.props.active} {...this.props}>
         <ProductsGroup>
-          <p>
-            <span
-              style={{
-                fontWeight: "700",
-                fontSize: "16px",
-                marginRight: "3px",
-              }}
-            >
-              My Bag,
-            </span>
-            {this.props.carts.length} items
-          </p>
+          <Text>
+            <Span>My Bag,</Span>
+            {this.getItemsCount()} items
+          </Text>
 
           {this.props.carts.map((product) => (
-            <Product key={product.name}>
+            <Product key={product.cartKey}>
               <ProductDetails>
                 <Group
                   justify="flex-start"
@@ -131,7 +130,7 @@ class MyBag extends Component {
               {this.props.carts.length ? this.getTotalPrice() : 0}
             </TotalPrice>
           </Group>
-          <Group align="center" gap="16px">
+          <Group justify="center" align="center" gap="16px">
             <ViewBag onClick={() => this.props.setActive()} to="/carts">
               VIEW BAG
             </ViewBag>

@@ -8,6 +8,7 @@ class Hero extends Component {
   componentDidMount() {
     this.props.loadCategories();
   }
+
   render() {
     return (
       <Container>

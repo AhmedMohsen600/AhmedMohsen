@@ -18,9 +18,7 @@ const myBagReducer = (state = initialState, action) => {
         activeDrop: action.payload === "close" ? false : !state.activeDrop,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 };
 

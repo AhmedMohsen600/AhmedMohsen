@@ -10,6 +10,7 @@ import {
   LockBody,
   DropDown,
   CurrencyGroup,
+  DownArrow,
   CurrencyText,
 } from "./styles/header";
 import { connect } from "react-redux";
@@ -20,6 +21,7 @@ import {
   loadCurrencies,
   setCurrentCurrency,
 } from "../../redux/action/currenciesAction";
+
 class Header extends Component {
   state = {
     category: "all",
@@ -36,12 +38,13 @@ class Header extends Component {
           <Group alignSelf="stretch">
             {headerItems.map((item) => (
               <CategoryName
-                key={item.name}
+                to="/"
                 onClick={() => {
                   this.setState({ category: item.category });
                   this.props.changeCategory(item.category);
                 }}
                 active={this.state.category === item.category ? 1 : 0}
+                key={item.name}
               >
                 {item.name.toUpperCase()}
               </CategoryName>
@@ -52,21 +55,7 @@ class Header extends Component {
             <Group position="relative" gap="8px">
               <Symbol onClick={() => this.props.setDropdown()}>
                 <CurrencyText>{this.props.currentSymbol}</CurrencyText>
-                <svg
-                  style={{ cursor: "pointer" }}
-                  width="8"
-                  height="4"
-                  viewBox="0 0 8 4"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1 0.5L4 3.5L7 0.5"
-                    stroke="black"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <DownArrow />
               </Symbol>
               <DropDown active={this.props.activeDrop}>
                 {this.props.currencies.map((currency) => (

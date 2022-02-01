@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components/macro";
-
+import { Link } from "react-router-dom";
 export const Container = styled.header`
   position: relative;
   margin-bottom: 50px;
@@ -24,18 +24,26 @@ export const Group = styled.div`
   flex: ${({ flex }) => flex};
   position: ${({ position }) => position};
   padding-top: ${({ paddingTop }) => paddingTop};
+  .categ-name {
+    text-decoration: none;
+    align-self: stretch;
+    color: ${({ active }) => (active ? "#5ECE7B" : "#1d1f22")};
+    border-bottom: 1px solid
+      ${({ active }) => (active ? "#5ECE7B" : "transparent")};
+  }
 `;
 
-export const CategoryName = styled.h4`
-  padding: 0 24px;
+export const CategoryName = styled(Link)`
   cursor: pointer;
+  padding: 0 24px;
   padding-top: 9px;
   font-size: 16px;
-  align-self: stretch;
   font-weight: 400;
+  align-self: stretch;
   color: ${({ active }) => (active ? "#5ECE7B" : "#1d1f22")};
   border-bottom: 1px solid
     ${({ active }) => (active ? "#5ECE7B" : "transparent")};
+  text-decoration: none;
 `;
 
 export const DropDown = styled.div`
@@ -108,4 +116,11 @@ export const LockBody = createGlobalStyle`
 body{
     overflow: hidden;
 }
+`;
+
+export const DownArrow = styled.div`
+  background: url("/images/down-arrow.svg") center / cover no-repeat;
+  width: 8px;
+  height: 4px;
+  cursor: pointer;
 `;

@@ -23,6 +23,7 @@ class Cart extends Component {
           </Image>
         </Link>
         <CartIcon
+          inStock={this.props.inStock}
           onClick={() =>
             this.props.inStock ? this.props.addToCart(this.props.product) : null
           }

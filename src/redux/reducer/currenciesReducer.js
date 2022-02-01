@@ -18,9 +18,7 @@ const currenciesReducer = (state = initialState, action) => {
         currentSymbol: action.payload,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 };
 

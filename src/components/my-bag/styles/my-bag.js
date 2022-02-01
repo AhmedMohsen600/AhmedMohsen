@@ -16,7 +16,7 @@ export const Container = styled.div`
   pointer-events: ${({ active }) => (active ? "all" : "none")};
   transform: ${({ active }) =>
     active ? "translateY(0%)" : "translateY(-10%)"};
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 85vh;
 `;
 
@@ -39,6 +39,7 @@ export const Product = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
 export const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,6 +73,7 @@ export const ProductSize = styled.div`
   font-size: 12px;
   color: ${({ active }) => (active ? "white" : "black")};
 `;
+
 export const ColorBox = styled.div`
   display: flex;
   justify-content: center;
@@ -82,6 +84,7 @@ export const ColorBox = styled.div`
   cursor: pointer;
   background-color: ${({ bgColor }) => bgColor};
 `;
+
 export const ProductCount = styled.div`
   display: flex;
   gap: 8px;
@@ -92,6 +95,7 @@ export const ProductImage = styled.div`
   width: 105px;
   height: 137px;
 `;
+
 export const ItemCount = styled.span`
   font-size: 16px;
   font-weight: 500;
@@ -150,4 +154,12 @@ export const ViewBag = styled(Link)`
 export const TotalPrice = styled.h5`
   font-size: 16px;
   font-weight: 500;
+`;
+
+export const Text = styled.p``;
+
+export const Span = styled.span`
+  font-weight: 700;
+  font-size: 16px;
+  margin-right: 3px;
 `;

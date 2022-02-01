@@ -21,9 +21,7 @@ const categoriesReducer = (state = initialState, action) => {
         currentCategory: action.payload,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 };
 
