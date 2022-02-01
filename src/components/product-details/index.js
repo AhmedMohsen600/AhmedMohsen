@@ -26,7 +26,7 @@ import {
   getProduct,
   updateProduct,
 } from "../../redux/action/getProductAction";
-
+import { sanitize } from "dompurify";
 class ProductDetails extends Component {
   state = {
     src: "",
@@ -116,9 +116,9 @@ class ProductDetails extends Component {
                 </Group>
                 <TextDesc
                   dangerouslySetInnerHTML={{
-                    __html: this.props.product.description,
+                    __html: sanitize(this.props.product.description),
                   }}
-                />
+                ></TextDesc>
               </DetailsHolder>
             </ContentHolder>
           </Product>
