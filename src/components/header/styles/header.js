@@ -9,7 +9,7 @@ export const Nav = styled.nav`
   width: 94%;
   margin: 0 auto;
   padding-top: 10px;
-  min-height: 8.7vh;
+  min-height: 9vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
