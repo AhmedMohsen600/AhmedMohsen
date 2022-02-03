@@ -31,7 +31,10 @@ class Cart extends Component {
           <ShopCart />
         </CartIcon>
         <Content>
-          <Title>{this.props.name}</Title>
+          <div className="holder">
+            <Title>{this.props.brand}</Title>
+            <Title>{this.props.name}</Title>
+          </div>
           <Price>
             {this.props.currentSymbol}
             {

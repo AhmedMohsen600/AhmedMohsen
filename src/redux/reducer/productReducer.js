@@ -30,6 +30,7 @@ const prodcutReducer = (state = intitialState, action) => {
           gallery: [],
           prices: [],
           attributes: [],
+          inStock: true,
         },
       };
     default:

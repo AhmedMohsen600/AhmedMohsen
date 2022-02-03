@@ -105,7 +105,6 @@ class ProductDetails extends Component {
                       : "0"}
                   </ProductPrice>
                   <AddToCartBtn
-                    disabled={false}
                     inStock={this.props.product.inStock}
                     onClick={() => this.props.addToCart(this.props.product)}
                   >

@@ -31,6 +31,7 @@ class Hero extends Component {
                   name={product.name}
                   prices={product.prices}
                   key={product.id}
+                  brand={product.brand}
                 />
               )
             )}

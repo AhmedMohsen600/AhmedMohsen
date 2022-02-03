@@ -20,7 +20,7 @@ export const CartIcon = styled.button`
   align-items: center;
   border: 0;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: ${({ inStock }) => (inStock ? "pointer" : "default")};
   z-index: 10;
 `;
 
@@ -47,6 +47,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  .holder {
+    display: flex;
+    gap: 8px;
+  }
 `;
 
 export const Title = styled.h5`
