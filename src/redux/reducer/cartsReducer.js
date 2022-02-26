@@ -4,7 +4,7 @@ import {
   DECREMENT_ITEM,
 } from "../../constant/actions";
 import { generateCartKey } from "../../helper/generateCartKey";
-
+import { updateData } from "../../helper/updateCartsData";
 const initialState = {
   data: [],
 };
@@ -16,9 +16,8 @@ const cartsReducer = (state = initialState, action) => {
       action.type === INCREMENT_ITEM ||
       action.type === DECREMENT_ITEM
     )
-  ) {
+  )
     return state;
-  }
 
   const product = { ...action.payload };
 
@@ -32,60 +31,43 @@ const cartsReducer = (state = initialState, action) => {
 
   product.cartKey = generateCartKey(product);
 
-  const doesExistInCart = state.data.find((item) => {
-    return item.cartKey === product.cartKey;
-  });
+  const doesExistInCart = state.data.find(
+    (item) => item.cartKey === product.cartKey
+  );
 
+  console.log(doesExistInCart);
   switch (action.type) {
     case ADD_TO_CART:
       // if Prodcut Alredy Exsit increase the qtx.
       if (doesExistInCart) {
-        const updateData = state.data.map((item) =>
-          item.cartKey === product.cartKey
-            ? { ...item, qtx: item.qtx + 1 }
-            : item
-        );
         return {
           ...state,
-          data: updateData,
+          data: updateData(state.data, doesExistInCart, true),
         };
       }
-
       return {
         ...state,
         data: [...state.data, { ...product, qtx: 1 }],
       };
 
     case INCREMENT_ITEM:
-      if (doesExistInCart) {
-        const updateData = state.data.map((item) =>
-          item.cartKey === product.cartKey
-            ? { ...item, qtx: item.qtx + 1 }
-            : item
-        );
-        return {
-          ...state,
-          data: updateData,
-        };
-      }
-      break;
+      return {
+        ...state,
+        data: updateData(state.data, doesExistInCart, true),
+      };
     case DECREMENT_ITEM:
-      if (doesExistInCart.qtx === 1)
-        return {
-          ...state,
-          data: state.data.filter(
-            (item) => item.cartKey !== doesExistInCart.cartKey
-          ),
-        };
-      else
-        return {
-          ...state,
-          data: state.data.map((item) =>
-            item.cartKey === product.cartKey
-              ? { ...item, qtx: item.qtx - 1 }
-              : item
-          ),
-        };
+      const decrementItem = state.data.map((item) =>
+        item.cartKey === doesExistInCart.cartKey
+          ? { ...item, qtx: item.qtx - 1 }
+          : item
+      );
+      return {
+        ...state,
+        data:
+          doesExistInCart.qtx === 1
+            ? updateData(state.data, doesExistInCart, false)
+            : decrementItem,
+      };
     default:
       return state;
   }

@@ -129,12 +129,22 @@ class ProductDetails extends Component {
 const mapStateToProps = (state) => {
   // setting the initial value for selecterAttribute before we use onAttributeChange function.
   const product = state.product.data;
-  product.attributes.map((attr) => {
-    const mappedAttribute = attr;
-    if (!mappedAttribute.selectedAttribute)
-      mappedAttribute.selectedAttribute = attr.items[0];
-    return mappedAttribute;
+
+  // product.attributes.map((attr) => {
+  //   const mappedAttribute = attr;
+  //   if (!mappedAttribute.selectedAttribute)
+  //     mappedAttribute.selectedAttribute = attr.items[0];
+  //   return mappedAttribute;
+  // });
+
+  //////  ----------- //////////
+  product.attributes = product.attributes?.map((attrib) => {
+    const attribute = { ...attrib };
+    if (!attribute.selectedAttribute)
+      attribute.selectedAttribute = attribute.items[0];
+    return attribute;
   });
+
   return {
     currentSymbol: state.currencies.currentSymbol,
     product: product,
