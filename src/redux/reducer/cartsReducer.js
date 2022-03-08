@@ -26,6 +26,7 @@ const cartsReducer = (state = initialState, action) => {
     const attribute = { ...attrib };
     if (!attribute.selectedAttribute)
       attribute.selectedAttribute = attribute.items[0];
+
     return attribute;
   });
 
